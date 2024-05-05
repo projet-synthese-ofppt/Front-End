@@ -2,6 +2,7 @@ import React, { useEffect, useState }from "react";
 import Chart from "react-apexcharts";
 import "./dashbord2.css";
 
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight} from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
@@ -36,7 +37,6 @@ export default function Dashbord2(){
     series: []
   })
 
-  const [Formateurs,setFormateurs]=useState([]);
   const [state,setState]=useState({
     options: {
       chart: {
@@ -85,9 +85,34 @@ export default function Dashbord2(){
 
   const [state2, setState2] = useState({
     options: {
-      labels: ['Formateurs Participés', 'Formateurs pas en cours participés', 'Responsables invités', 'Responsables office'],
+      labels: ['Formateurs Participés', 'Formateurs pas en cours participés'],
       chart: {
        
+        type: 'donut'
+      },
+      colors:  ['#77ddf9', '#ffa0a3', '#FFFF00'],
+      
+      legend: {
+        position: 'bottom'
+      },
+      responsive: [{
+        breakpoint: 480,
+        options: {
+          
+          legend: {
+            position: 'bottom'
+          }
+        }
+      }]
+    },
+    series: []
+  });
+
+  const [state3,setState3] = useState({
+    options: {
+      labels: [ 'Responsables invités', 'Responsables office'],
+
+      chart: {
         type: 'donut'
       },
       
@@ -107,19 +132,30 @@ export default function Dashbord2(){
     series: []
   });
 
+  const navigate = useNavigate();
 
 
-
-
-
-
+ 
 
   //getInfoFormateur
 
   useEffect(() => {
     const getDashbord = async () => {
+
+      const token = localStorage.getItem('token');
+      if (!token) {
+          navigate("/");
+          return;
+      }
+
       try {
-        const response = await axios.get("http://localhost:3002/api/dashbord");
+        
+        const response = await axios.get("http://localhost:3002/api/dashbord",
+        {
+          headers:
+          {"authorization":`Bearer ${token}`}
+        });
+
         const formateursData = response.data.formateurs[0];
         let office=0;
         let guest=0;
@@ -167,11 +203,13 @@ export default function Dashbord2(){
           ],} )
           setChartFormation({...chartFormation,series:[response.data.formationsFinis[0][0].n1,response.data.formationsEncours[0][0].n2,response.data.formationNotStart[0][0].n3]})
 
-           setState2({...state2,series:[response.data.formateurPart[0][0].n4,response.data.formateurNotPart[0][0].n5,response.data.RespoGuest[0][0].n6,response.data.RespoOffice[0][0].n7]})
+           setState2({...state2,series:[response.data.formateurPart[0][0].n4,response.data.formateurNotPart[0][0].n5]})
+           setState3({...state3,series:[response.data.RespoGuest[0][0].n6,response.data.RespoOffice[0][0].n7]})
         
-         console.log(response.data.formateurPart[0][0].n4,response.data.formateurNotPart[0][0].n5,response.data.RespoGuest[0][0].n6,response.data.RespoOffice[0][0].n7)
+        
       } catch (error) {
         console.log(error);
+        navigate("/");
       }
     };
   
@@ -250,7 +288,9 @@ export default function Dashbord2(){
 
             </div>
             <div className="dountChart">
-            <Chart options={state2.options} series={state2.series} type="donut" width="380" />
+            <Chart options={state2.options} series={state2.series} type="donut" width="300" />
+            <Chart options={state3.options} series={state3.series} type="donut" width="300" />
+
             </div>
             
          </div>

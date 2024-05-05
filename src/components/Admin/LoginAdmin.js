@@ -49,7 +49,7 @@ const navigate=useNavigate()
    
 
     return (
-        <section>
+        <section className='Loginsection'>
         
             <div className='logopic'><img src='ofppt.png' /></div>
           
@@ -57,10 +57,10 @@ const navigate=useNavigate()
                     
                         <div className="formContainer">
                             <h1 >Se connecter</h1>
-                            <form onSubmit={validateForm}>
+                            <form onSubmit={validateForm} className='Loginform'>
                                 <input type="text" className="form-control my-4 py-2" placeholder="Username" onChange={(e)=>setUsername(e.target.value)}/>
                                 <input type="password" className="form-control my-4 py-2" placeholder="Password" onChange={(e)=>setPassword(e.target.value)}/>
-                                  <span>Mot de passe oublié?</span>
+                                  <span className='.Loginspan'>Mot de passe oublié?</span>
                                     <button className="logbutton">Login</button>
                                     
                                 

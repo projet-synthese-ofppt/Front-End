@@ -126,14 +126,14 @@ const handleSubmit = async (e) => {
    
 
 return(<div className='div1'>
-<nav>holder</nav>
+<nav className="Gestionnairenav">holder</nav>
 <div className='div2'>
-    <h1>Ajouter Gestionnaire</h1>
-<main>
-<div className='image'> <img src={formData.image ? URL.createObjectURL(formData.image) : 'profile 1.png'} width="300px" alt="Preview"/> <input type='file' onChange={handleImageChange}/></div> 
-<form onSubmit={handleSubmit}>
-    <div>
-<label htmlFor="firstName" className="label">Prénom</label>
+    <h1 id="gestionnaire">Ajouter Gestionnaire</h1>
+<main className="Gestionnairemain"> 
+<div className='imageGestionnaire'> <img src={formData.image ? URL.createObjectURL(formData.image) : 'profile 1.png'} width="300px" alt="Preview"/> <input type='file' onChange={handleImageChange}/></div> 
+<form onSubmit={handleSubmit} className="formGestionnaire">
+    <div className="groupGestionnaire">
+<label htmlFor="firstName" className="labelGestionnare">Prénom</label>
                         <input
                             type="text"
                             className="control"
@@ -144,8 +144,8 @@ return(<div className='div1'>
                             required
                         />
                         {errors.firstName && <div className="invalid-feedback">{errors.firstName}</div>}</div>
-                        <div>
-                        <label htmlFor="lastName" className="label">Nom</label>
+                        <div className="groupGestionnaire">
+                        <label htmlFor="lastName"className="labelGestionnare">Nom</label>
                         <input
                             type="text"
                             className="control"
@@ -156,8 +156,8 @@ return(<div className='div1'>
                             required
                         />
                         {errors.lastName && <div className="invalid-feedback">{errors.lastName}</div>}</div>
-                        <div>
-                        <label htmlFor="email" className="label">Login</label>
+                        <div className="groupGestionnaire">
+                        <label htmlFor="email" className="labelGestionnare">Login</label>
                         <input
                             type="email"
                             className="control"
@@ -168,8 +168,8 @@ return(<div className='div1'>
                             required
                         />
                         {errors.email && <div className="invalid-feedback">{errors.email}</div>}</div>
-                        <div>
-                        <label htmlFor="password" className="label">Mot de passe</label>
+                        <div className="groupGestionnaire">
+                        <label htmlFor="password" className="labelGestionnare">Mot de passe</label>
                         <input
                             type="password"
                             className="control"
@@ -180,7 +180,7 @@ return(<div className='div1'>
                             required
                         />
                         {errors.password && <div className="invalid-feedback">{errors.password}</div>}</div>
-                                             <div >  <button type="submit" className="button">Ajouter</button></div> 
+                                             <div >  <button type="submit" className="buttonGestionnaire">Ajouter</button></div> 
 
     </form></main></div></div>);
 }

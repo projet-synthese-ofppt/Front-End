@@ -124,17 +124,17 @@ import '../style/ProfileGestionnaire.css'
         }; setErrors(newErrors);
     };
     return(<div className='div1'>
-    <nav>holder</nav>
+    <nav className='Profilenav'>holder</nav>
     <div className='div2'>
-        <h1>Profile Gestionnaire</h1>
-    <main>
-       <div className='image'><img src={img=== undefined ?'profile 1.png': img} width="300px" alt="profile"/> <input type='file' onChange={(e)=>setimg(e.target.value)}/>{errors.image && <div className="invalid-feedback">{errors.image}</div>}</div> 
-    <form onSubmit={handleSubmit}>
-        <div>
-    <label htmlFor="firstName" className="label">Prénom</label>
+        <h1 className='Profile'>Profile Gestionnaire</h1>
+    <main className='Profilemain'>
+       <div className='imageprofile'><img src={img=== undefined ?'profile 1.png': img} width="300px" alt="profile"/> <input type='file' onChange={(e)=>setimg(e.target.value)}/>{errors.image && <div className="invalid-feedback">{errors.image}</div>}</div> 
+    <form onSubmit={handleSubmit} className='Profileform'>
+        <div className='Profilegroup'>
+    <label htmlFor="firstName" className="Profilelabel">Prénom</label>
                             <input
                                 type="text"
-                                className="control"
+                                className="Profilecontrol"
                                 id="firstName"
                                 name="firstName"
                                 value={formData.firstName}
@@ -143,11 +143,11 @@ import '../style/ProfileGestionnaire.css'
                                 placeholder='Prénom'
                             />
                             {errors.firstName && <div className="invalid-feedback">{errors.firstName}</div>}</div>
-                            <div>
-                            <label htmlFor="lastName" className="label">Nom</label>
+                            <div className='Profilegroup'>
+                            <label htmlFor="lastName" className="Profilelabel">Nom</label>
                             <input
                                 type="text"
-                                className="control"
+                                className="Profilecontrol"
                                 id="lastName"
                                 name="lastName"
                                 value={formData.lastName}
@@ -156,11 +156,11 @@ import '../style/ProfileGestionnaire.css'
                                 placeholder='Nom'
                             />
                             {errors.lastName && <div className="invalid-feedback">{errors.lastName}</div>}</div>
-                            <div>
-                            <label htmlFor="email" className="label">Login</label>
+                            <div className='Profilegroup'>
+                            <label htmlFor="email"className="Profilelabel">Login</label>
                             <input
                                 type="email"
-                                className="control"
+                                className="Profilecontrol"
                                 id="email"
                                 name="email"
                                 value={formData.email}
@@ -169,11 +169,11 @@ import '../style/ProfileGestionnaire.css'
                                 placeholder='Login'
                             />
                             {errors.email && <div className="invalid-feedback">{errors.email}</div>}</div>
-                            <div>
-                            <label htmlFor="password" className="label">Mot de passe</label>
+                            <div className='Profilegroup'>
+                            <label htmlFor="password" className="Profilelabel">Mot de passe</label>
                             <input
                                 type="password"
-                                className="control"
+                                className="Profilecontrol"
                                 id="password"
                                 name="password"
                                 value={formData.password}

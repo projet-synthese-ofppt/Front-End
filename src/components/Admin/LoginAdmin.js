@@ -2,13 +2,13 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import axios from "axios";
-
+import { useNavigate } from 'react-router-dom';
 function LoginAdmin() {
     const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({username:'',password:''});
- const [message,setmessage]=useState("");
 
+const navigate=useNavigate()
 
   const validateForm = async (e) => {
     e.preventDefault();
@@ -33,7 +33,7 @@ function LoginAdmin() {
        .then((res)=>{
           const token=res.data.token
           localStorage.setItem('token',token);
-          console.log("dashbord")
+          navigate('/addGestionnaire')
        })
        .catch((err)=>{
           console.log(err)

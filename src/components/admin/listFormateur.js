@@ -14,12 +14,14 @@ export default function ListFormateur()
             getData();
         },[])
     
-        const getData = () =>
+        const getData = async () =>
         {
-            axios.get('http://localhost:3002/api/data/person/formateur')
+           await axios.get('http://localhost:3002/api/data/person/formateur')
             .then(res =>
-                {   console.log(res.data)
-                    setFormateurData(res.data)   
+                {   
+                    console.log(res.data)
+                    setFormateurData(res.data) 
+                     
                 }
             ).catch(error => console.log(error))
         }

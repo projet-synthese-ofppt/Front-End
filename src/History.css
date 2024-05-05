@@ -1,10 +1,15 @@
-.container {
+.containerHistory {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    width: 90%;
+    margin: 50px;
+  }
+  .History{
+    display: flex;
   }
   
-  .container > div {
+  .containerHistory > div {
     flex: 1;
     margin: 0 10px;
     border: 1px solid black;
@@ -12,7 +17,7 @@
     padding: 15px;
   }
   
-  .container > div > h2 {
+  .containerHistory > div > h2 {
     margin-bottom: 10px;
   }
   

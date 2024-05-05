@@ -1,6 +1,7 @@
 import { useState } from "react";
 import './ListGestionnaire.css'
 import { Link } from "react-router-dom";
+import Sidebar from "../../Sidebar";
 
 
 export default function ListFormation()
@@ -18,7 +19,9 @@ export default function ListFormation()
     const [searchResult,setSearchResult] = useState(formationData);
 
 
-    return <div className="ListGestionnaireContainer">
+    return <div className="TheContainer">
+        <Sidebar/>
+     <div className="ListGestionnaireContainer">
         <div className="searchBar">
             <input className="searchBarInput" type="text" name="" id="" placeholder="Rechercher" />
         </div>
@@ -55,5 +58,5 @@ export default function ListFormation()
          </table>
 
     </div>
-
+    </div>
 }

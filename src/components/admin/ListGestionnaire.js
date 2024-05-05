@@ -3,11 +3,13 @@ import'./ListGestionnaire.css'
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
+import Sidebar from "../../Sidebar";
 
 
 export default function ListGestionnaire()
 {
     const [gestionnaireData,setGestionnaireData] = useState([])
+    const [message,setMessage]=useState("")
 
 
     useEffect(  () =>
@@ -21,6 +23,7 @@ export default function ListGestionnaire()
         .then(res =>
             {   console.log(res.data)
                 setGestionnaireData(res.data)   
+              
             }
         ).catch(error => console.log(error))
     }
@@ -39,13 +42,17 @@ export default function ListGestionnaire()
     
 
 
-    return <div className="ListGestionnaireContainer">
+    return <div className="TheContainer">
+        <Sidebar/>
+        <div className="ListGestionnaireContainer">
+        
+        
         <div className="searchBar">
             <input className="searchBarInput" type="text" name="" id="" placeholder="Rechercher" />
         </div>
         <div className="titleContainer">
-            <p>List des gestionnaires</p>
-            <button className="addGestionnaireButton">Ajouter un gestionnaire</button>
+            <p style={{fontSize:"30px",fontWeight:"bold"}}>List des gestionnaires</p>
+           <Link to="/addGestionnaire"> <button className="addGestionnaireButton">Ajouter un gestionnaire</button></Link>
         </div>
         <hr />
         <table>
@@ -54,7 +61,7 @@ export default function ListGestionnaire()
                 <th>Matricule</th>
                 <th>Nom Complet</th>
                 <th>Login</th>
-                <th>Phone</th>
+                
                 
                 <th>Date Creation</th>
                 <th>Action</th>
@@ -66,12 +73,16 @@ export default function ListGestionnaire()
                     <td>{i.id}</td>
                     <td>{i.first_name} {i.last_name}</td>
                     <td>{i.login}</td>
-                    <td>{i.phone}</td>
+                  
                     
                     <td>{i.creationDate}</td>
                     <td className="ListgestionnaireActions">
-                        <Link> <img src="/media/edit.png" alt="" width='19px' /></Link>
-                        <button className="deleteButton" onClick={() => handleClick(i.id)} ><img src="/media/delete.png" alt="" width='19px' /></button>
+                        <Link to={`/profilGestionnaire/${i.id}`}> <img src="/media/edit.png" alt="" width='19px' /></Link>
+                        <button className="deleteButton" onClick={() => {
+    const confirmDelete = window.confirm("Vous êtes sûr de supprimer ce gestionnaire ?");
+    if (confirmDelete) {
+        handleClick(i.id);
+    }}} ><img src="/media/delete.png" alt="" width='19px' /></button>
                     </td>
                 </tr>)}
             </tbody>
@@ -80,5 +91,6 @@ export default function ListGestionnaire()
          </table>
 
     </div>
-
+    </div>
+       
 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './History.css';
+import Sidebar from './Sidebar';
 
 function History() {
     const originalAdminsActions = [
@@ -73,8 +74,10 @@ function History() {
     }
   };
 
-  return (
-    <div className="container">
+  return ( <div className='History'>
+       <Sidebar/>
+    <div className="containerHistory">
+    
       <div>
         <h2>Actions des administrateurs</h2>
         <input
@@ -126,6 +129,7 @@ function History() {
           ))}
         </ul>
       </div>
+    </div>
     </div>
   );
 }

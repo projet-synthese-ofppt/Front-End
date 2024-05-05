@@ -1,0 +1,68 @@
+
+section{
+   background-color: #FBFAF8;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+   
+  
+
+}
+.logopic{
+    display: flex;
+    padding-top: 10px;
+    
+}
+.logopic img{
+   width: 150px;
+   margin-left: 100px;
+}
+.formContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    justify-self: center;
+   
+    border-radius: 20px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+   
+width: 605px;
+height: 539px;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    width: 90%;
+  
+    
+}
+form input {
+    width: 400px;
+    padding: 15px;
+     border: solid gainsboro ;
+     margin-bottom: 10px;
+    border-radius: 15px;
+    color: black;
+}
+form span{
+    color: blue;
+    font-size: 20px;
+}
+ .logbutton {
+    width: 435px;
+    height: 50px;
+    align-self: center;
+    border-radius: 15px;
+    background-color: #025BA4;
+    color: white;
+    font-size: 20px;
+    border:#025BA4;
+    margin-top: 30px;
+}
+
+.adminLoginTitle{
+    font-size: 50px;
+}

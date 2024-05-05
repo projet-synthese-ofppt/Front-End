@@ -1,6 +1,7 @@
 import React, { useEffect, useState }from "react";
 import Chart from "react-apexcharts";
 import "./dashbord2.css";
+import Sidebar from "../../Sidebar";
 
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -252,9 +253,10 @@ export default function Dashbord2(){
       
       
  return <div className="mydashbordContainer">
-    <div className="ImaneMenu">
+    {/* <div className="ImaneMenu">
 
-    </div>
+    </div> */}
+    <Sidebar/>
     <div className="mydashbord">
         <div className="mydashtitle">
             <p style={{fontSize:"38px"}}>Dashboard</p>

@@ -1,11 +1,14 @@
-import '../style/ProfileGestionnaire.css'
+import './ProfileGestionnaire.css'
  import { useState,useEffect } from "react";
- import { useNavigate } from 'react-router-dom';
+ import { useNavigate, useParams } from 'react-router-dom';
  import axios from 'axios';
+import Sidebar from '../../Sidebar';
+
  
  function ProfileGestionnaire(){
     const navigate = useNavigate();
-    const userId=5;
+    
+    const userId=useParams().id;
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -124,11 +127,11 @@ import '../style/ProfileGestionnaire.css'
         }; setErrors(newErrors);
     };
     return(<div className='div1'>
-    <nav>holder</nav>
+   <Sidebar/>
     <div className='div2'>
         <h1>Profile Gestionnaire</h1>
     <main>
-       <div className='image'><img src={img=== undefined ?'profile 1.png': img} width="300px" alt="profile"/> <input type='file' onChange={(e)=>setimg(e.target.value)}/>{errors.image && <div className="invalid-feedback">{errors.image}</div>}</div> 
+       <div className='image'><img src={img=== undefined ?'media/profile 1.png': img} width="300px" alt="profile"/> <input type='file' onChange={(e)=>setimg(e.target.value)}/>{errors.image && <div className="invalid-feedback">{errors.image}</div>}</div> 
     <form onSubmit={handleSubmit}>
         <div>
     <label htmlFor="firstName" className="label">Prénom</label>

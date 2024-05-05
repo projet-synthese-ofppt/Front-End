@@ -1,8 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Sidebar.css';
 
 const Sidebar = ({ user }) => {
+const navigate=useNavigate()
+
+  function seDeconnecter (){
+   
+      
+      localStorage.removeItem('token');
+      
+      navigate("/login");
+    
+  }
+
   return (
     <div className="sidebar">
       <div className="logo-container">
@@ -12,28 +23,28 @@ const Sidebar = ({ user }) => {
       <ul className="menu-items">
         <li>
           <Link to="/dashboard">
-          <img src="diagramme.png" alt='diagramme' className='image'/>
+          <img src="diagramme.png" alt='diagramme' className='imageSide'/>
             Dashboard
           </Link>
         </li>
         <li>
-          <img src="parametres.png" alt='parametres' className='image'/>
+          <img src="parametres.png" alt='parametres' className='imageSide'/>
             Gestion
           <ul className="submenu">
             <li>
-              <Link to="/manager"><img src="utilisateur.png" alt='utilisateur' className='image'/>Gestionnaire</Link>
+              <Link to="/manager"><img src="utilisateur.png" alt='utilisateur' className='imageSide'/>Gestionnaire</Link>
             </li>
             <li>
-              <Link to="/trainers"><img src="diplome.png" alt='diplome' className='image'/>Formateurs</Link>
+              <Link to="/trainers"><img src="diplome.png" alt='diplome' className='imageSide'/>Formateurs</Link>
             </li>
             <li>
-              <Link to="/training"><img src="education.png" alt='education' className='image'/>Formation</Link>
+              <Link to="/training"><img src="education.png" alt='education' className='imageSide'/>Formation</Link>
             </li>
           </ul>
         </li>
         <li>
           <Link to="/history">
-          <img src="historique.png" alt='temps' className='image'/>
+          <img src="historique.png" alt='temps' className='imageSide'/>
             Historique
           </Link>
         </li>
@@ -41,19 +52,19 @@ const Sidebar = ({ user }) => {
       
       <div className="user-info">
   <Link to="/profil">
-    <img src={user.photo} alt="User" className="user-photo" />
+    <img src="media/user.png" alt="User" className="user-photo" />
   </Link>
   <div className="user-details">
     <Link to="/profile" className="user-name">
-      {user.firstName} {user.lastName}
+     Admin Admin
     </Link>
     <div className="footer-links">
       <Link to="/settings">
-        <img src="parametre.png" alt='parametre' className='image'/>
+        <img src="parametre.png" alt='parametre' className='imageSide'/>
       </Link>
-      <Link to="/logout">
-        <img src="sortie.png" alt='sortie' className='image'/>
-      </Link>
+      <button onClick={seDeconnecter} className='Logout'>
+        <img src="sortie.png" alt='sortie' className='imageSide'/>
+      </button>
     </div>
   </div>
 </div>

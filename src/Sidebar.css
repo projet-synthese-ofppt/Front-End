@@ -1,12 +1,14 @@
 .sidebar {
-    width: 160px;
-    height: 100vh;
+    width: 170px;
+    height: 130vh;
     background-color: #034378;
     color: white;
     padding: 10px;
+    font-weight: bold;
   }
   body{
     margin: 0;
+ 
   }
   .logo-container {
     text-align: center;
@@ -75,8 +77,13 @@
   .footer {
     margin-top: 20px;
   }
-  .image{
+  .imageSide{
     width: 20px;
     height: 20px;
     margin-right: 5px;
+  }
+
+  .Logout{
+         background-color: #034378;
+         border: solid #034378;
   }

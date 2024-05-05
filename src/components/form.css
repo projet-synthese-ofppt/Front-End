@@ -1,0 +1,89 @@
+body{
+  background-color: #FCFCFC;
+  
+}
+main  {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-content: center;
+}
+
+main h1 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+  align-items: center;
+}
+
+form label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 16px;
+  color: #025BA4;
+
+}
+
+#jour , #heure{
+  display: inline;
+  font-size: 16px;
+  color: #025BA4;
+}
+
+form input{
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+}
+.planning{
+    margin-bottom: 20px;
+}
+form input[type=time],#jour_input {
+    width: 23%;
+    display: inline;
+    margin: 5px ;
+}
+
+form button ,.link{
+  padding: 10px 20px;
+  margin: 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #025BA4;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+
+}
+
+.link {
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.first_section{
+    display: flex;
+    justify-content: space-around;
+    margin-right: 5px;
+}
+
+.first_aside{
+    padding-right: 50px;
+}
+
+.section_button{
+    display: flex;
+    justify-content: center;
+}
+
+.valider {
+  background-color: #dff0d8; 
+  color: #3c763d; 
+  border: 1px solid #d6e9c6; 
+  padding: 10px; 
+  margin-bottom: 20px; 
+  border-radius: 4px; 
+}

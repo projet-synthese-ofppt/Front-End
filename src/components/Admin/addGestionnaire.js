@@ -131,7 +131,7 @@ const handleSubmit = async (e) => {
    
 
 return(<div className='div1'>
-<Sidebar/>
+
 <div className='div2'>
 
     <h1>Ajouter Gestionnaire</h1>

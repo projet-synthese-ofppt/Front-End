@@ -145,8 +145,8 @@ export default function Dashbord2(){
 
       const token = localStorage.getItem('token');
       if (!token) {
-          navigate("/");
-          return;
+        navigate("/Login");
+          
       }
 
       try {
@@ -210,7 +210,7 @@ export default function Dashbord2(){
         
       } catch (error) {
         console.log(error);
-        navigate("/");
+      
       }
     };
   
@@ -256,7 +256,7 @@ export default function Dashbord2(){
     {/* <div className="ImaneMenu">
 
     </div> */}
-    <Sidebar/>
+  
     <div className="mydashbord">
         <div className="mydashtitle">
             <p style={{fontSize:"38px"}}>Dashboard</p>

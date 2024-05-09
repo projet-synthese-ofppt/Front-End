@@ -13,15 +13,20 @@ function LoginAdmin() {
 const navigate=useNavigate()
 useEffect(()=>{
   const checkAuthentification = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      if (token) {
-        navigate("/dashboard");
-      }
-    } catch (err) {
-      console.log("Error checking authentication", err);
-      navigate("/loginAdmin");
-    }
+    // try {
+    //   const token = localStorage.getItem('token');
+    //   if (token) {
+    //     navigate("/dashboard");
+    //   }
+    // } catch (err) {
+    //   console.log("Error checking authentication", err);
+    //   navigate("/loginAdmin");
+    // }
+
+    
+
+    
+    
 }
 checkAuthentification()
 },[])

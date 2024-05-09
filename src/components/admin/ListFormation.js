@@ -1,26 +1,48 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import './ListGestionnaire.css'
 import { Link } from "react-router-dom";
 import Sidebar from "../../Sidebar";
+import axios from "axios";
 
 
 export default function ListFormation()
 {
-    const [formationData,setFormationData] = useState([
-        {Titre:"Formation",specialite:'specialite1',dateDebut:'10/10/2023',dateFin:'12/10/2023'},
-        {Titre:"Formation",specialite:'specialite1',dateDebut:'10/10/2023',dateFin:'12/10/2023'},
-        {Titre:"Formation",specialite:'specialite1',dateDebut:'10/10/2023',dateFin:'12/10/2023'},
-        {Titre:"Formation",specialite:'specialite1',dateDebut:'10/10/2023',dateFin:'12/10/2023'},
-        {Titre:"Formation",specialite:'specialite1',dateDebut:'10/10/2023',dateFin:'12/10/2023'},
-        {Titre:"Formation",specialite:'specialite1',dateDebut:'10/10/2023',dateFin:'12/10/2023'}
-    ])
+    const [formationData,setFormationData] = useState([])
+    const [searchedFormation,setSearchedFormation] = useState([]);
 
+useEffect(()=>
+{
+    getData();
+},[])
+
+    const getData = async () =>
+        {
+            axios.get('http://localhost:3002/api/data/formation')
+            .then(res =>
+                {
+                    console.log(res.data)
+                    setFormationData(res.data);
+                    setSearchedFormation(res.data);
+                }
+            )
+        }
 
     const [searchResult,setSearchResult] = useState(formationData);
 
 
+    function handleClick(id)
+    {
+        axios.delete(`http://localhost:3002/api/data/formation/${id}`)
+        .then(res =>
+            {
+                console.log(res.data)
+                getData();
+            }
+        ).catch(err => console.error(err))
+    }
+
     return <div className="TheContainer">
-        <Sidebar/>
+      
      <div className="ListGestionnaireContainer">
         <div className="searchBar">
             <input className="searchBarInput" type="text" name="" id="" placeholder="Rechercher" />
@@ -32,24 +54,28 @@ export default function ListFormation()
         <table>
             <thead>
                 
-                <th>Ttire</th>
-                <th>Spécialité</th>
+                <th>Titre</th>
+                <th>Domain</th>
                 <th>Date Début</th>
                 <th>Date Fin</th>
                 <th>Action</th>
 
             </thead>
             <tbody>
-                {searchResult.map((i,index) => <tr>
+                {searchedFormation.map((i,index) => <tr>
                     
-                    <td>{i.Titre}</td>
-                    <td>{i.specialite}</td>
-                    <td>{i.dateDebut}</td>
-                    <td>{i.dateFin}</td>
+                    <td>{i.titre}</td>
+                    <td>{i.domain}</td>
+                    <td>{i.dateDebut.toLocaleString().split('T')[0]}</td>
+                    <td>{i.dateFin.toLocaleString().split('T')[0]}</td>
                    
                     <td className="ListgestionnaireActions">
-                        <Link to={`formateur/${i.matricule}`}> <img src="/media/edit.png" alt="" width='19px' /></Link>
-                        <button className="deleteButton"><img src="/media/delete.png" alt="" width='19px' /></button>
+                        <Link to={`formation/${i.id}`}> <img src="/media/edit.png" alt="" width='19px' /></Link>
+                        <button className="deleteButton" onClick={() => {
+    const confirmDelete = window.confirm("Vous êtes sûr de supprimer cette formation ?");
+    if (confirmDelete) {
+        handleClick(i.id);
+    }}} ><img src="/media/delete.png" alt="" width='19px' /></button>
                     </td>
                 </tr>)}
             </tbody>

@@ -75,7 +75,7 @@ function History() {
   };
 
   return ( <div className='History'>
-       <Sidebar/>
+       
     <div className="containerHistory">
     
       <div>

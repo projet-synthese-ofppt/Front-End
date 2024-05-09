@@ -31,13 +31,15 @@ import Sidebar from '../../Sidebar';
         }
       };
       checkAuthentification(); 
+
       const fetchData = async () => {
         try {
            
           const response = await axios.get(`http://localhost:3002/api/Profile/${userId}`);
-        
+            console.log(response.data)
           setFormData({firstName: response.data.data.first_name,   lastName: response.data.data.last_name,
-            email:  response.data.data.login, password: response.data.data.password})
+            email:  response.data.data.login, password: response.data.data.password});
+            setimg(`http://localhost:3002/uploads/${response.data.data.image}`);
           
           
      
@@ -127,7 +129,7 @@ import Sidebar from '../../Sidebar';
         }; setErrors(newErrors);
     };
     return(<div className='div1'>
-   <Sidebar/>
+  
     <div className='div2'>
         <h1>Profile Gestionnaire</h1>
     <main>

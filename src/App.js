@@ -1,13 +1,35 @@
-import LoginAdmin from "./components/Admin/LoginAdmin";
+import logo from './logo.svg';
+import './App.css';
+import { Route,Routes } from 'react-router-dom';
+import Dashbord2 from './components/admin/dashbord2';
 
-import {Routes, Route } from "react-router-dom";
-import Ajoutergestionnaire from "./components/Admin/addGestionnaire";
-import ProfileGestionnaire from "./components/ProfileGestionnaire";
-export default function App(){
+import LoginAdmin from './components/admin/LoginAdmin';
+import ListGestionnaire from './components/admin/ListGestionnaire';
+import ListFormateur from './components/admin/listFormateur';
+import ListFormation from './components/admin/ListFormation';
+import Ajoutergestionnaire from './components/admin/addGestionnaire';
+import ProfileGestionnaire from './components/Gestionnaire/ProfileGestionnaire';
+import History from './History';
+import Sidebar from './Sidebar';
+import AdminSection from './AdminSection';
 
-  return <Routes>
-    <Route path="/loginAdmin" element={<LoginAdmin/>}></Route>
-    <Route path="/addGestionnaire" element={<Ajoutergestionnaire/>}></Route>
-    <Route path="/ProfileGestionnaire/:id" element={<ProfileGestionnaire/>}></Route>
-  </Routes>
+function App() {
+  return <div className='SiteContainer'>
+    
+    <Routes>
+    <Route path="/Login" element={<LoginAdmin/>}></Route>
+    <Route path='*' element={<AdminSection/>} ></Route>
+    </Routes>
+    
+    
+
+
+    {/* <Routes>
+      <Route path='*' element={<AdminSection/>}></Route>
+    </Routes> */}
+  </div>
+  
+ 
 }
+
+export default App;

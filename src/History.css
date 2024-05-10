@@ -1,0 +1,45 @@
+.containerHistory {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+    margin: 50px;
+  }
+  .History{
+    display: flex;
+  }
+  
+  .containerHistory > div {
+    flex: 1;
+    margin: 0 10px;
+    border: 1px solid black;
+    border-radius: 40px;
+    padding: 15px;
+  }
+  
+  .containerHistory > div > h2 {
+    margin-bottom: 10px;
+  }
+  
+  .green-button {
+    background-color: #4CAF50; 
+    color: white; 
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .green-button:hover {
+    background-color: #45a049;
+  }
+  .search-input {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+    width: 150px;
+  }
+  li {
+    margin-bottom: 15px;
+  }

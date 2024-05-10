@@ -2,6 +2,8 @@
  import { useState,useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import './AddGestionnaire.css'
+import Sidebar from "../../Sidebar";
 
 function Ajoutergestionnaire() {
   const navigate = useNavigate();
@@ -30,7 +32,7 @@ function Ajoutergestionnaire() {
     image: null 
 });
 
-const datasent=false;
+let datasent=false;
 const [errors, setErrors] = useState({
     firstName: '',
     lastName: '',
@@ -38,6 +40,8 @@ const [errors, setErrors] = useState({
     password: '',
     image:''
 });
+
+const [message,setMessage]=useState("")
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
@@ -101,12 +105,13 @@ const handleSubmit = async (e) => {
             formDataToSend.append('password', formData.password);
             formDataToSend.append('image', formData.image); // Append the image file to the form data
             
-            await axios.post('http://localhost:3002/api/addGestionnaire', formDataToSend, {
+         const response= await axios.post('http://localhost:3002/api/addGestionnaire', formDataToSend, {
               headers: {
                 'Content-Type': 'multipart/form-data'
               }
             });
             datasent=true;
+            setMessage(response.data.message)
             
           } catch (error) {
             console.error('Error submitting form: ', error);
@@ -126,14 +131,17 @@ const handleSubmit = async (e) => {
    
 
 return(<div className='div1'>
-<nav className="Gestionnairenav">holder</nav>
+
 <div className='div2'>
-    <h1 id="gestionnaire">Ajouter Gestionnaire</h1>
-<main className="Gestionnairemain"> 
-<div className='imageGestionnaire'> <img src={formData.image ? URL.createObjectURL(formData.image) : 'profile 1.png'} width="300px" alt="Preview"/> <input type='file' onChange={handleImageChange}/></div> 
-<form onSubmit={handleSubmit} className="formGestionnaire">
-    <div className="groupGestionnaire">
-<label htmlFor="firstName" className="labelGestionnare">Prénom</label>
+
+    <h1>Ajouter Gestionnaire</h1>
+    {message &&<p style={{ backgroundColor: 'lightblue', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' ,width:"80%",textAlign:"center"}}>{message}</p>
+}
+<main>
+<div className='image' > <img src={formData.image ? URL.createObjectURL(formData.image) : 'profile 1.png'} width="200px" alt="Preview"/> <input type='file' onChange={handleImageChange}/></div> 
+<form onSubmit={handleSubmit}>
+    <div>
+<label htmlFor="firstName" className="label">Prénom</label>
                         <input
                             type="text"
                             className="control"

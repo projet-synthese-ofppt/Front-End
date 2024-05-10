@@ -1,0 +1,92 @@
+.sidebar {
+    width: 12%;
+    height: 130vh;
+    background-color: #034378;
+  
+    color: white;
+    padding: 10px;
+    font-weight: bold;
+    margin-right: 40px;
+  }
+  body{
+    margin: 0;
+ 
+  }
+  .logo-container {
+    text-align: center;
+  }
+  .logo {
+    width: 80px;
+  }
+  .menu-title {
+    font-size: 18px;
+    margin-top: 40px;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  .menu-items {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 120px;
+  }
+  .menu-items li {
+    margin-bottom: 20px;
+  }
+  .menu-items a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+  .submenu {
+    margin-top: 20px;
+    list-style: none;
+    margin-left: 8px;
+   
+  }
+  .user-name{
+    color: white;
+    text-decoration: none;
+  }
+  
+  .user-photo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  .user-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-details {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .footer-links {
+    display: flex;
+    margin-top: 10px; 
+  }
+  
+  .footer a {
+    display: inline-block;
+    margin-right: 10px;
+    color: white;
+    text-decoration: none;
+  }
+  
+  .footer {
+    margin-top: 20px;
+  }
+  .imageSide{
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+  }
+
+  .Logout{
+         background-color: #034378;
+         border: solid #034378;
+  }

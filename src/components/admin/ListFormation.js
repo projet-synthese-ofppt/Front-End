@@ -3,6 +3,7 @@ import './ListGestionnaire.css'
 import { Link } from "react-router-dom";
 import Sidebar from "../../Sidebar";
 import axios from "axios";
+import DropList from "../subComponents/dropList";
 
 
 export default function ListFormation()
@@ -20,7 +21,7 @@ useEffect(()=>
             axios.get('http://localhost:3002/api/data/formation')
             .then(res =>
                 {
-                    console.log(res.data)
+                   
                     setFormationData(res.data);
                     setSearchedFormation(res.data);
                 }
@@ -35,7 +36,7 @@ useEffect(()=>
         axios.delete(`http://localhost:3002/api/data/formation/${id}`)
         .then(res =>
             {
-                console.log(res.data)
+                
                 getData();
             }
         ).catch(err => console.error(err))
@@ -46,6 +47,7 @@ useEffect(()=>
      <div className="ListGestionnaireContainer">
         <div className="searchBar">
             <input className="searchBarInput" type="text" name="" id="" placeholder="Rechercher" />
+            
         </div>
         <div className="titleContainer">
             <p>List des formateurs</p>

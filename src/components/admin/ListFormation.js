@@ -10,7 +10,7 @@ export default function ListFormation()
 {
     const [formationData,setFormationData] = useState([])
     const [searchedFormation,setSearchedFormation] = useState([]);
-    const [searchResult,setSearchResult] = useState(formationData);
+   
     const [searchedTitre,setSearchedTitre] = useState("");
 
 
@@ -24,7 +24,7 @@ useEffect(()=>
             axios.get('http://localhost:3002/api/data/formation')
             .then(res =>
                 {
-                   
+                   console.log(res.data)
                     setFormationData(res.data);
                     setSearchedFormation(res.data);
                 }
@@ -47,7 +47,7 @@ useEffect(()=>
 
     function handleSearch()
     {
-        const searchResult = formationData.filter( g => g.first_name.toLowerCase().includes(searchedTitre.toLowerCase()) || g.last_name.toLowerCase().includes(searchedTitre.toLowerCase()) );
+        const searchResult = formationData.filter( g => g.titre.toLowerCase().includes(searchedTitre.toLowerCase()) );
         setSearchedFormation(searchResult);
     }
     function handleReset()
@@ -63,7 +63,7 @@ useEffect(()=>
       
      <div className="ListGestionnaireContainer">
         <div className="searchBar">
-            <input className="searchBarInput" type="text" name="" id="" placeholder="Rechercher" />
+            <input className="searchBarInput" type="text" name="" id="" placeholder="Rechercher" onChange={e => setSearchedTitre(e.target.value)}  value={searchedTitre}/>
             <button className="searchButton" onClick={handleSearch} >Rechercher</button>
             <button className="resetButton" onClick={handleReset} >réinitialiser</button>
             

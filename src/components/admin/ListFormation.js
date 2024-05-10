@@ -10,6 +10,9 @@ export default function ListFormation()
 {
     const [formationData,setFormationData] = useState([])
     const [searchedFormation,setSearchedFormation] = useState([]);
+    const [searchResult,setSearchResult] = useState(formationData);
+    const [searchedTitre,setSearchedTitre] = useState("");
+
 
 useEffect(()=>
 {
@@ -28,7 +31,7 @@ useEffect(()=>
             )
         }
 
-    const [searchResult,setSearchResult] = useState(formationData);
+  
 
 
     function handleClick(id)
@@ -42,11 +45,27 @@ useEffect(()=>
         ).catch(err => console.error(err))
     }
 
+    function handleSearch()
+    {
+        const searchResult = formationData.filter( g => g.first_name.toLowerCase().includes(searchedTitre.toLowerCase()) || g.last_name.toLowerCase().includes(searchedTitre.toLowerCase()) );
+        setSearchedFormation(searchResult);
+    }
+    function handleReset()
+    {
+        setSearchedFormation(formationData);
+        setSearchedTitre("");
+        
+    }
+    
+
+
     return <div className="TheContainer">
       
      <div className="ListGestionnaireContainer">
         <div className="searchBar">
             <input className="searchBarInput" type="text" name="" id="" placeholder="Rechercher" />
+            <button className="searchButton" onClick={handleSearch} >Rechercher</button>
+            <button className="resetButton" onClick={handleReset} >réinitialiser</button>
             
         </div>
         <div className="titleContainer">

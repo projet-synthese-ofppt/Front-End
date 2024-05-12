@@ -5,6 +5,7 @@ import './Sidebar.css';
 const Sidebar = ({ user }) => {
 const navigate=useNavigate()
 
+
   function seDeconnecter (){
    
       
@@ -51,11 +52,11 @@ const navigate=useNavigate()
       </ul>
       
       <div className="user-info">
-  <Link to="/profil">
+  <Link to="/admin/profile">
     <img src="media/user.png" alt="User" className="user-photo" />
   </Link>
   <div className="user-details">
-    <Link to="/profile" className="user-name">
+    <Link to="/admin/profile" className="user-name">
      Admin Admin
     </Link>
     <div className="footer-links">

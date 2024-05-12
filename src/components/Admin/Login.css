@@ -1,9 +1,10 @@
 
-section{
+.Loginsection{
    background-color: #FBFAF8;
     height: 100vh;
     display: flex;
     flex-direction: column;
+    width: 100%;
    
   
 
@@ -13,7 +14,7 @@ section{
     padding-top: 10px;
     
 }
-.logopic img{
+#logoImage{
    width: 150px;
    margin-left: 100px;
 }
@@ -31,7 +32,7 @@ section{
 width: 605px;
 height: 539px;
 }
-form{
+.LoginForm{
     display: flex;
     flex-direction: column;
     font-size: 20px;
@@ -39,7 +40,7 @@ form{
   
     
 }
-form input {
+.form-control {
     width: 400px;
     padding: 15px;
      border: solid gainsboro ;
@@ -47,7 +48,7 @@ form input {
     border-radius: 15px;
     color: black;
 }
-form span{
+.Loginspan{
     color: blue;
     font-size: 20px;
 }

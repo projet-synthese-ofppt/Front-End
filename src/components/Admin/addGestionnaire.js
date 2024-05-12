@@ -6,6 +6,7 @@ import './AddGestionnaire.css'
 import Sidebar from "../../Sidebar";
 
 function Ajoutergestionnaire() {
+  console.log("on add Gestionnaire")
   const navigate = useNavigate();
   
   useEffect(() => {
@@ -104,12 +105,13 @@ const handleSubmit = async (e) => {
             formDataToSend.append('email', formData.email);
             formDataToSend.append('password', formData.password);
             formDataToSend.append('image', formData.image); // Append the image file to the form data
-            
+            console.log(formDataToSend)
          const response= await axios.post('http://localhost:3002/api/addGestionnaire', formDataToSend, {
               headers: {
                 'Content-Type': 'multipart/form-data'
               }
             });
+            console.log(formDataToSend);
             datasent=true;
             setMessage(response.data.message)
             
@@ -137,11 +139,11 @@ return(<div className='div1'>
     <h1>Ajouter Gestionnaire</h1>
     {message &&<p style={{ backgroundColor: 'lightblue', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' ,width:"80%",textAlign:"center"}}>{message}</p>
 }
-<main>
+<main className="Addmain">
 <div className='image' > <img src={formData.image ? URL.createObjectURL(formData.image) : 'profile 1.png'} width="200px" alt="Preview"/> <input type='file' onChange={handleImageChange}/></div> 
-<form onSubmit={handleSubmit}>
-    <div>
-<label htmlFor="firstName" className="label">Prénom</label>
+<form onSubmit={handleSubmit} className="Addform">
+    <div className="groupGestionnaire">
+<label htmlFor="firstName" className="labelGestionnare">Prénom</label>
                         <input
                             type="text"
                             className="control"

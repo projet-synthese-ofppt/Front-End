@@ -72,16 +72,16 @@ checkAuthentification()
     return (
         <section className='Loginsection'>
         
-            <div className='logopic'><img src='ofppt.png' /></div>
+            <div className='logopic'><img src='ofppt.png'id="logoImage" /></div>
           
                 
                     
                         <div className="formContainer">
                             <h1 className='adminLoginTitle' >Se connecter</h1>
-                            <form onSubmit={validateForm}>
+                            <form onSubmit={validateForm} className='LoginForm'>
                                 <input type="text" className="form-control my-4 py-2" placeholder="Username" onChange={(e)=>setUsername(e.target.value)}/>
                                 <input type="password" className="form-control my-4 py-2" placeholder="Password" onChange={(e)=>setPassword(e.target.value)}/>
-                                  <span className='.Loginspan'>Mot de passe oublié?</span>
+                                  <span className='Loginspan'>Mot de passe oublié?</span>
                                     <button className="logbutton">Login</button>
                                     
                                 

@@ -2,6 +2,7 @@
     display: flex;
    background-color:#FBFAF8;
     height: 100vh;
+    width: 88%;
 }
 .div2{
     display: flex;
@@ -13,12 +14,9 @@
     width: 100%;
 }
 
-nav{
-    background: #025BA4;
-    width: 10%;
-}
 
-main{
+
+.Addmain{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -28,7 +26,7 @@ main{
     height: 70%;
     
 }
-form{
+.Addform{
    display: flex;
    flex-direction: column;
    justify-content: space-between;
@@ -39,7 +37,9 @@ form{
   
 }
  
-form div{
+
+.groupGestionnaire
+{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -48,7 +48,7 @@ form div{
 
   
 }
-.label {
+.labelGestionnare {
    
     font-weight: bold;
    
@@ -63,7 +63,7 @@ form div{
     
   }
   
-  .button {
+  .buttonGestionnaire {
    font-size: 30px;
     background-color: #025BA4;
     color: #fff;
@@ -78,6 +78,6 @@ form div{
     
   }
   
-  .button:hover {
+  .buttonGestionnaire:hover {
     background-color: #0056b3;
   }

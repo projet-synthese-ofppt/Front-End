@@ -3,12 +3,16 @@ import './ListGestionnaire.css'
 import { Link } from "react-router-dom";
 import Sidebar from "../../Sidebar";
 import axios from "axios";
+import DropList from "../subComponents/dropList";
 
 
 export default function ListFormation()
 {
     const [formationData,setFormationData] = useState([])
     const [searchedFormation,setSearchedFormation] = useState([]);
+   
+    const [searchedTitre,setSearchedTitre] = useState("");
+
 
 useEffect(()=>
 {
@@ -20,14 +24,14 @@ useEffect(()=>
             axios.get('http://localhost:3002/api/data/formation')
             .then(res =>
                 {
-                    console.log(res.data)
+                   console.log(res.data)
                     setFormationData(res.data);
                     setSearchedFormation(res.data);
                 }
             )
         }
 
-    const [searchResult,setSearchResult] = useState(formationData);
+  
 
 
     function handleClick(id)
@@ -35,17 +39,34 @@ useEffect(()=>
         axios.delete(`http://localhost:3002/api/data/formation/${id}`)
         .then(res =>
             {
-                console.log(res.data)
+                
                 getData();
             }
         ).catch(err => console.error(err))
     }
 
+    function handleSearch()
+    {
+        const searchResult = formationData.filter( g => g.titre.toLowerCase().includes(searchedTitre.toLowerCase()) );
+        setSearchedFormation(searchResult);
+    }
+    function handleReset()
+    {
+        setSearchedFormation(formationData);
+        setSearchedTitre("");
+        
+    }
+    
+
+
     return <div className="TheContainer">
       
      <div className="ListGestionnaireContainer">
         <div className="searchBar">
-            <input className="searchBarInput" type="text" name="" id="" placeholder="Rechercher" />
+            <input className="searchBarInput" type="text" name="" id="" placeholder="Rechercher" onChange={e => setSearchedTitre(e.target.value)}  value={searchedTitre}/>
+            <button className="searchButton" onClick={handleSearch} >Rechercher</button>
+            <button className="resetButton" onClick={handleReset} >réinitialiser</button>
+            
         </div>
         <div className="titleContainer">
             <p>List des formateurs</p>

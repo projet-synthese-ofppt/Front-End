@@ -36,7 +36,12 @@ useEffect(()=>
 
     function handleClick(id)
     {
-        axios.delete(`http://localhost:3002/api/data/formation/${id}`)
+        const token = localStorage.getItem('token');
+        axios.delete(`http://localhost:3002/api/data/formation/${id}`,
+        {
+            headers: {"authorization":`Bearer ${token}`}
+           }
+        )
         .then(res =>
             {
                 

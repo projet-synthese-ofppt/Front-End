@@ -8,7 +8,7 @@ import ListGestionnaire from './components/Admin/ListGestionnaire';
 import ListFormateur from './components/Admin/listFormateur';
 import ListFormation from './components/Admin/ListFormation';
 import Ajoutergestionnaire from './components/Admin/addGestionnaire';
-import ProfileGestionnaire from './components/Gestionnaire/ProfileGestionnaire';
+// import ProfileGestionnaire from './components/Gestionnaire/ProfileGestionnaire';
 import History from './History';
 import Sidebar from './Sidebar';
 import AdminSection from './AdminSection';

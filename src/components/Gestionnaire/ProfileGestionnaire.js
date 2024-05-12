@@ -1,5 +1,5 @@
 import './ProfileGestionnaire.css'
- import { useState,useEffect } from "react";
+ import { useState,useEffect } from 'react';
  import { useNavigate, useParams } from 'react-router-dom';
  import axios from 'axios';
 import Sidebar from '../../Sidebar';
@@ -116,10 +116,13 @@ import Sidebar from '../../Sidebar';
             }
                 console.log("going to update");
                console.log(formData);
+               const token = localStorage.getItem('token');
                     const DataToSend = [userId,formData.firstName,formData.lastName, formData.email,
                    formData.password,img] 
                     console.log(DataToSend)
-                   const response2= await axios.post('http://localhost:3002/api//Profile/:id',DataToSend);
+                   const response2= await axios.post('http://localhost:3002/api//Profile/:id',DataToSend,{
+                    headers: {"authorization":`Bearer ${token}`}
+                   });
                     console.log(response2)
                     console.log("should be updated")
                     

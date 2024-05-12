@@ -104,10 +104,11 @@ const handleSubmit = async (e) => {
             formDataToSend.append('email', formData.email);
             formDataToSend.append('password', formData.password);
             formDataToSend.append('image', formData.image); // Append the image file to the form data
-            
+            const token = localStorage.getItem('token');
          const response= await axios.post('http://localhost:3002/api/addGestionnaire', formDataToSend, {
               headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'multipart/form-data',
+                "authorization":`Bearer ${token}`
               }
             });
             datasent=true;

@@ -4,9 +4,20 @@ import "./ListGestionnaire.css";
 import { Link } from "react-router-dom";
 
 import Sidebar from "../../Sidebar";
+import DropList from "../subComponents/dropList";
 export default function ListFormateur() {
   const [formateurData, setFormateurData] = useState([]);
   const [searchedFormateur,setSearchedFormateur] = useState([])
+  const [reset,setReset] = useState(false);
+
+  const [selectedVille,setSelectedVille] = useState('');
+  const [selectedCompetence,setSelectedCompetence] = useState('');
+  const [selectedEtablissement,setSelectedEtablissement] = useState('');
+  const [selectedSpecialite,setSelectedSpecialite] = useState('');
+  const [selectedType,setSelectedType] = useState('');
+  const [selectedFormateurName,setSelectedFormateurName] = useState('');
+  
+
 
   useEffect(() => {
     getData();
@@ -31,24 +42,84 @@ export default function ListFormateur() {
         {"authorization":`Bearer ${token}`}
       })
       .then((res) => {
-        console.log(res.data);
+        
         getData();
       })
       .catch((err) => console.error(err));
   }
 
+  function searchedVille(v)
+  {
+    setReset(false)
+    setSelectedVille(v)
+  }
+
+  function searchedCompetence(c)
+  {
+    setReset(false)
+    setSelectedCompetence(c);
+  }
+
+  function searchedEtablissement(e)
+  {
+    setReset(false)
+    setSelectedEtablissement(e);
+  }
+
+  function searchedSpecialite(e)
+  {
+    setReset(false)
+    setSelectedSpecialite(e);
+  }
+
+  function searchedType(e)
+  {
+    setReset(false)
+    setSelectedType(e);
+  }
+  function handleSearch() {
+    const T = formateurData.filter((f) => {
+      const matchesVille = selectedVille ? f.ville.includes(selectedVille) : true;
+      const matchesEtablissement = selectedEtablissement ? f.nom.includes(selectedEtablissement) : true;
+      const matchesSpecialite = selectedSpecialite ? f.more_informations.specialite.includes(selectedSpecialite) : true;
+      const matchesType = selectedType ? f.type.includes(selectedType.toLowerCase()) : true;
+      const matchesFormateurName = selectedFormateurName ? (f.first_name.toLowerCase() +' '+ f.last_name.toLowerCase()).includes(selectedFormateurName.toLowerCase()) : true;
+      const matchesCompetence = selectedCompetence ? f.more_informations.compethences.includes(selectedCompetence) : true;
+  
+      return matchesVille && matchesEtablissement && matchesSpecialite && matchesType && matchesFormateurName && matchesCompetence;
+    });
+  
+    setSearchedFormateur(T);
+  }
+
+  function handleReset()
+  {
+    setReset(true);
+    setSelectedCompetence("");
+    setSelectedEtablissement("");
+    setSelectedSpecialite("");
+    setSelectedVille("");
+    setSelectedFormateurName("");
+    setSelectedType("");
+    setSearchedFormateur(formateurData)
+  }
+
   return (
     <div className="TheContainer">
-     
       <div className="ListGestionnaireContainer">
         <div className="searchBar">
-          <input
-            className="searchBarInput"
-            type="text"
-            name=""
-            id=""
-            placeholder="Rechercher"
-          />
+          <div className="searchButtonsContainer">
+            <input className="searchBarInput" type="text" name="" id="" placeholder="Rechercher" value={selectedFormateurName} onChange={e=>setSelectedFormateurName(e.target.value)}/>
+            <button className="searchButton" onClick={handleSearch} >Rechercher</button>
+            <button className="resetButton" onClick={handleReset} >réinitialiser</button>
+          </div>
+          <div className="dropListContainer">
+            <DropList paramType={"ville"} searchedVille={searchedVille} reset ={reset} />
+            <DropList paramType={"competence"} searchedCompetence={searchedCompetence} reset ={reset} />
+            <DropList paramType={"etablissement"} searchedEtablissement={searchedEtablissement} reset ={reset} />
+            <DropList paramType={"Specialite"} searchedSpecialite={searchedSpecialite} reset ={reset} />
+            <DropList paramType={"type"} searchedType={searchedType} reset ={reset} />
+          </div>
         </div>
         <div className="titleContainer">
           <p>List des formateurs</p>
@@ -56,6 +127,7 @@ export default function ListFormateur() {
         <hr />
         <table>
           <thead>
+            <tr>
             <th>Image</th>
             <th>Matricule</th>
             <th>Nom</th>
@@ -66,41 +138,54 @@ export default function ListFormateur() {
             <th>Type</th>
             <th>Competence</th>
             <th>Action</th>
+            </tr>
           </thead>
           <tbody>
-            {formateurData && formateurData.map((i, index) => (
+            {searchedFormateur &&
+              searchedFormateur.map((i, index) => (
                 <tr key={index}>
-                <td>
-                    <img src={`http://localhost:3002/uploads/${i.image}`} alt="" width="50px" />
-                </td>
-                <td>{i.person_id}</td>
-                <td>
+                  <td>
+                    <img
+                      src={`http://localhost:3002/uploads/${i.image}`}
+                      alt=""
+                      width="50px"
+                    />
+                  </td>
+                  <td>{i.person_id}</td>
+                  <td>
                     {i.first_name} {i.last_name}
-                </td>
-                <td>{i.login}</td>
-                <td>{i.more_informations.specialite}</td>
-                <td>{i.nom}</td>
-                <td>{i.ville}</td>
-                <td>{i.type}</td>
-                <td>
+                  </td>
+                  <td>{i.login}</td>
+                  <td>{i.more_informations.specialite}</td>
+                  <td>{i.nom}</td>
+                  <td>{i.ville}</td>
+                  <td>{i.type}</td>
+                  <td>
                     {i.more_informations.compethences.map((x, idx) => (
-                    <span key={idx}>{x}<br/></span> 
+                      <span key={idx}>
+                        {x}
+                        <br />
+                      </span>
                     ))}
-                </td>
-                <td className="ListgestionnaireActions">
-                   
-                    
-                     <button className="deleteButton" onClick={() => {
-    const confirmDelete = window.confirm("Vous êtes sûr de supprimer ce gestionnaire ?");
-    if (confirmDelete) {
-        handleClick(i.person_id);
-    }}} ><img src="/media/delete.png" alt="" width='19px' /></button>
-                </td>
+                  </td>
+                  <td className="ListgestionnaireActions">
+                    <button
+                      className="deleteButton"
+                      onClick={() => {
+                        const confirmDelete = window.confirm(
+                          "Vous êtes sûr de supprimer ce gestionnaire ?"
+                        );
+                        if (confirmDelete) {
+                          handleClick(i.person_id);
+                        }
+                      }}
+                    >
+                      <img src="/media/delete.png" alt="" width="19px" />
+                    </button>
+                  </td>
                 </tr>
-            ))}
-            </tbody>
-
-
+              ))}
+          </tbody>
         </table>
       </div>
     </div>

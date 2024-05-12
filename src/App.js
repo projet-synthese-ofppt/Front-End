@@ -1,14 +1,14 @@
 import logo from './logo.svg';
 import './App.css';
 import { Route,Routes } from 'react-router-dom';
-import Dashbord2 from './components/admin/dashbord2';
+import Dashbord2 from './components/Admin/dashbord2';
 
-import LoginAdmin from './components/admin/LoginAdmin';
-import ListGestionnaire from './components/admin/ListGestionnaire';
-import ListFormateur from './components/admin/listFormateur';
-import ListFormation from './components/admin/ListFormation';
-import Ajoutergestionnaire from './components/admin/addGestionnaire';
-import ProfileGestionnaire from './components/Gestionnaire/ProfileGestionnaire';
+import LoginAdmin from './components/Admin/LoginAdmin';
+import ListGestionnaire from './components/Admin/ListGestionnaire';
+import ListFormateur from './components/Admin/listFormateur';
+import ListFormation from './components/Admin/ListFormation';
+import Ajoutergestionnaire from './components/Admin/addGestionnaire';
+// import ProfileGestionnaire from './components/Gestionnaire/ProfileGestionnaire';
 import History from './History';
 import Sidebar from './Sidebar';
 import AdminSection from './AdminSection';

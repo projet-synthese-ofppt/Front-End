@@ -7,40 +7,12 @@ import axios from "axios";
 function History() {
   const navigate=useNavigate()
     
-  
-
-  
-  const originalManagersActions = [
-    { id: 1, action: "Modifier le formateur d'id 2" },
-    { id: 2, action: "Supprimer le formateur d'id 3" },
-    { id: 3, action: "Ajouter un formateur" },
-    { id: 4, action: "Ajouter une formation" },
-    { id: 5, action: "Modifier une formation" },
-    { id: 6, action: "Supprimer une formation" },
-    { id: 7, action: "Consulter les statistiques" },
-    { id: 8, action: "Gérer les comptes" },
-    { id: 9, action: "Configurer les paramètres du système" },
-    { id: 10, action: "Exporter les données" },
-  ];
-  const originalTrainingsActions = [
-    { id: 1, action: "Supprimer le formateur d'id 2" },
-    { id: 2, action: "Supprimer le formation d'id 2" },
-    { id: 3, action: "Supprimer le formateur d'id 4" },
-    { id: 4, action: "Ajouter un formateur" },
-    { id: 5, action: "Ajouter une formation" },
-    { id: 6, action: "Modifier une formation" },
-    { id: 7, action: "Supprimer une formation" },
-    { id: 8, action: "Consulter les statistiques" },
-    { id: 9, action: "Gérer les comptes" },
-    { id: 10, action: "Configurer les paramètres du système" },
-  ];
   const [adminsActions, setAdminsActions] = useState([]);
-  const [managersActions, setManagersActions] = useState(originalManagersActions);
-  const [trainingsActions, setTrainingsActions] = useState(originalTrainingsActions);
-
-  const [adminSearchTerm, setAdminSearchTerm] = useState('');
-  const [managerSearchTerm, setManagerSearchTerm] = useState('');
-  const [trainingSearchTerm, setTrainingSearchTerm] = useState('');
+  const [id,setId]=useState("");
+  const [action,setAction]=useState("");
+  const [dateDebut,setDateDebut]=useState("")
+  const [dateFin,setDateFin]=useState("")
+  const[searchHistory,setSearchHistory]=useState([])
 
 
 
@@ -59,6 +31,7 @@ function History() {
             });
             console.log(response.data.adminHistory);
             setAdminsActions(response.data.adminHistory)
+            setSearchHistory(response.data.adminHistory)
         } catch (err) {
             console.log(err);
         }
@@ -68,89 +41,100 @@ function History() {
 
 }, [navigate]);
 
+function isDateBetween(startDate, endDate, targetDate) {
+  
+  targetDate.setHours(0, 0, 0, 0);
 
-  const filterAdminsActionsById = (id) => {
-    const filteredActions = adminsActions.filter(action => action.id === id);
-    if (filteredActions.length === 0) {
-      setAdminsActions([]);
-    } else {
-      setAdminsActions(filteredActions);
-    }
-  };
+  
+  startDate.setHours(0, 0, 0, 0);
+  endDate.setHours(23, 59, 59, 999);
 
-  const filterManagersActionsById = (id) => {
-    const filteredActions = originalManagersActions.filter(action => action.id === id);
-    if (filteredActions.length === 0) {
-      setManagersActions([]);
-    } else {
-      setManagersActions(filteredActions);
-    }
-  };
+  return startDate <= targetDate && endDate >= targetDate;
+}
 
-  const filterTrainingsActionsById = (id) => {
-    const filteredActions = originalTrainingsActions.filter(action => action.id === id);
-    if (filteredActions.length === 0) {
-      setTrainingsActions([]);
-    } else {
-      setTrainingsActions(filteredActions);
-    }
-  };
+function handleSearch() {
+  const filteredActions = adminsActions.filter((a) => {
+    const matchesId = id ? a.Actor==id : true;
+    const matchesAction = action ? a.action_type.includes(action) : true;
+    const matchesDateRange = (dateDebut && dateFin) ? isDateBetween(new Date(dateDebut), new Date(dateFin), new Date(a.action_date)) : true;
+
+    return matchesId && matchesAction && matchesDateRange;
+  });
+
+  setSearchHistory(filteredActions)
+}
+
+  
 
   return ( <div className='History'>
        
     <div className="containerHistory">
     
       <div>
-        <h2>Actions des administrateurs</h2>
+        <h1 style={{textAlign:"center",marginBottom:"50px"}}>Actions des administrateurs</h1>
+        <label htmlFor="">Id Actor: </label>
         <input
           type="number"
           placeholder="Rechercher par ID"
-          value={adminSearchTerm}
-          onChange={(e) => setAdminSearchTerm(parseInt(e.target.value))}
+         
           className='search-input'
+          onChange={(e)=>{setId(e.target.value)}}
         />
-        <button onClick={() => filterAdminsActionsById(adminSearchTerm)} className='green-button'>Rechercher</button>
-        {adminsActions.length === 0 && <p>Aucune action trouvée pour cet ID.</p>}
-        <ul>
-          {adminsActions.map((action, index) => (
-            <li key={index}>{action.action_details} le {action.action_date}</li>
-          ))}
-        </ul>
-      </div>
-      <div>
-        <h2>Actions des gestionnaires</h2>
+        <label htmlFor="">Action: </label>
+        <select   onChange={(e)=>{setAction(e.target.value)}}>
+             <option value="Delete">Delete</option>
+             <option value="Ajout">Ajout</option>
+             <option value="Update">Update</option>
+
+        </select>
+        <label htmlFor="">Date Début: </label>
         <input
-          type="number"
+          type="date"
           placeholder="Rechercher par ID"
-          value={managerSearchTerm}
-          onChange={(e) => setManagerSearchTerm(parseInt(e.target.value))}
           className='search-input'
+          onChange={(e)=>{setDateDebut(e.target.value)}}
         />
-        <button onClick={() => filterManagersActionsById(managerSearchTerm)} className='green-button'>Rechercher</button>
-        {managersActions.length === 0 && <p>Aucune action trouvée pour cet ID.</p>}
-        <ul>
-          {managersActions.map((action, index) => (
-            <li key={index}>{action.action}</li>
-          ))}
-        </ul>
-      </div>
-      <div>
-        <h2>Actions de formation</h2>
+          <label htmlFor="">Date Fin: </label>
         <input
-          type="number"
+          type="date"
           placeholder="Rechercher par ID"
-          value={trainingSearchTerm}
-          onChange={(e) => setTrainingSearchTerm(parseInt(e.target.value))}
           className='search-input'
+          onChange={(e)=>{setDateFin(e.target.value)}}
         />
-        <button onClick={() => filterTrainingsActionsById(trainingSearchTerm)} className='green-button'>Rechercher</button>
-        {trainingsActions.length === 0 && <p>Aucune action trouvée pour cet ID.</p>}
-        <ul>
-          {trainingsActions.map((action, index) => (
-            <li key={index}>{action.action}</li>
-          ))}
-        </ul>
+
+
+        <button  className='green-button' onClick={handleSearch}>Rechercher</button>
+       
+        <div className='myjournalhistory'>
+        <table border="3px">
+   <tr>
+    <th>Id Acteur</th>
+     <th>Action</th>
+    
+     <th>La date d'ffectuation</th>
+     <th>Details</th>
+   </tr>
+
+  {
+    searchHistory.map((j)=>{
+      return <tr>
+        <td>{j.Actor}</td>
+        <td>{j.action_type}</td>
+       
+        <td>{j.action_date}</td>
+        <td>{j.action_details}</td>
+      </tr>
+
+    })
+  }
+
+
+
+
+ </table>
+ </div>
       </div>
+      
     </div>
     </div>
   );

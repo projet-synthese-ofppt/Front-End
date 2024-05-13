@@ -190,7 +190,7 @@ import Sidebar from '../../Sidebar';
                                 placeholder='Mot de passe'
                             />
                             {errors.password && <div className="invalid-feedback">{errors.password}</div>}</div>
-                                                    <button type="submit" className="buttonGestion">Valider les changements</button>
+                                                    <button type="submit" className="buttonGestion">Enregistrer</button>
 
         </form></main></div></div>);
  }

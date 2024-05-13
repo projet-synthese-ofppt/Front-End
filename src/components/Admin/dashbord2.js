@@ -269,8 +269,15 @@ export default function Dashbord2(){
                         "authorization": `Bearer ${token}`
                     }
                 });
-                console.log(response.data.adminHistory);
-                setJournal(response.data.adminHistory)
+               
+                const sortedEntries = response.data.adminHistory.sort((a, b) => {
+                  return new Date(b.action_date) - new Date(a.action_date);
+              });
+      
+              
+              const latestEntries = sortedEntries.slice(0, 11);
+      
+              setJournal(latestEntries);
             } catch (err) {
                 console.log(err);
             }

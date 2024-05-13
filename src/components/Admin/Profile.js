@@ -5,13 +5,30 @@ import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
     const navigate = useNavigate();
-    const id = 7;
+    const [id,setId]=useState("")
     const [formData, setFormData] = useState({
         first_name: '',
         last_name: '',
         login: '',
         password: ''
     });
+    const [message,setMessage]=useState("")
+    const [style,setStyle]=useState({})
+    useEffect(()=>{
+        const getAdminId= async()=>{
+            const token = localStorage.getItem('token');
+            if (!token) {
+              navigate("/Login");
+                
+            }
+            const response=await axios.get("http://localhost:3002/api/adminId",{
+                headers:{"authorization":`Bearer ${token}`}
+            })
+            setId(response.data.id)
+        }
+
+        getAdminId()
+    },[navigate])
     useEffect(() => {
         const checkAuthentification = async () => {
             try {
@@ -28,8 +45,9 @@ const Profile = () => {
 
         const getAdminProfile= async () => {
             try {
+                console.log(id)
                 const response = await axios.get(`http://localhost:3002/api/Profile/${id}`);
-                console.log(response.data)
+                
                 setFormData({first_name : response.data.data.first_name, last_name : response.data.data.last_name,
                 login : response.data.data.login, password : response.data.data.password});
             } catch (err) {
@@ -37,7 +55,7 @@ const Profile = () => {
             }   
         };
         getAdminProfile();  
-    },[navigate]);
+    },[navigate,id]);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -95,17 +113,21 @@ const Profile = () => {
                 };
                 const response2 = await axios.post(`http://localhost:3002/api/admin/profile/${id}`, DataToSend);
                 console.log(response2);
-                console.log("Le profil a été mis à jour avec succès.");
+                setMessage("Le profil a été mis à jour avec succès.");
+                setStyle({color:"green",textAlign:"center"})
+
             } catch (error) {
-                console.error("Erreur lors de la mise à jour du profil :", error);
+                setMessage("Erreur lors de la mise à jour du profil ");
+                setStyle({color:"red",textAlign:"center"})
             }
         }
         setErrors(newErrors);
     };
 
     return (
-        <div className="container">
-            <div className="form1-container">
+        <div className="containerProfilAdmin">
+            <div className="form1-containerProfilAdmin">
+                <p style={style}>{message}</p>
                 <h2>Profil Admin</h2>
                 <form onSubmit={handleSubmit}>
                     <div>

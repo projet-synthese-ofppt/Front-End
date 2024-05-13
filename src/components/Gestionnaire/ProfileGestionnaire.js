@@ -14,7 +14,7 @@ import './ProfileGestionnaire.css'
         lastName: '',
         email: '',
         password: '',
-        img:null,
+        img:'',
     });
     
 const [img2,setimg2]=useState();
@@ -49,8 +49,8 @@ const [img2,setimg2]=useState();
             email:  response.data.data.login, password: response.data.data.password});
             setFormData1(prevState => ({
                 ...prevState,
-                img: `http://localhost:3002/uploads/${response.data.data.image}`              }));
-      console.log(formData1)
+                img: response.data.data.image             }));
+      
           
           
      
@@ -83,54 +83,55 @@ const [img2,setimg2]=useState();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-       
-        let valid = true;
-        const newErrors = { ...errors };
-        if (!formData1.firstName.trim()) {
-            newErrors.firstName = 'First name is required';
-            valid = false;
-        } else {
-            newErrors.firstName = '';
-        }
-        if (!formData1.lastName.trim()) {
-            newErrors.lastName = 'Last name is required';
-            valid = false;
-        } else {
-            newErrors.lastName = '';
-        }
-        if (!formData1.email.trim()) {
-            newErrors.email = 'Email is required';
-            valid = false;
-        } else if (!/\S+@\S+\.\S+/.test(formData1.email)) {
-            newErrors.email = 'Invalid email address';
-            valid = false;
-        } else {
-            newErrors.email = '';
-        }
-        if (!formData1.password.trim()) {
-            newErrors.password = 'Password is required';
-            valid = false;
-        } else if (formData1.password.length < 6) {
-            newErrors.password = 'Password must be at least 6 characters';
-            valid = false;
-        } else {
-            newErrors.password = '';
-        }
+      
+        // let valid = true;
+        // const newErrors = { ...errors };
+        // if (!formData1.firstName.trim()) {
+        //     newErrors.firstName = 'First name is required';
+        //     valid = false;
+        // } else {
+        //     newErrors.firstName = '';
+        // }
+        // if (!formData1.lastName.trim()) {
+        //     newErrors.lastName = 'Last name is required';
+        //     valid = false;
+        // } else {
+        //     newErrors.lastName = '';
+        // }
+        // if (!formData1.email.trim()) {
+        //     newErrors.email = 'Email is required';
+        //     valid = false;
+        // } else if (!/\S+@\S+\.\S+/.test(formData1.email)) {
+        //     newErrors.email = 'Invalid email address';
+        //     valid = false;
+        // } else {
+        //     newErrors.email = '';
+        // }
+        // if (!formData1.password.trim()) {
+        //     newErrors.password = 'Password is required';
+        //     valid = false;
+        // } else if (formData1.password.length < 6) {
+        //     newErrors.password = 'Password must be at least 6 characters';
+        //     valid = false;
+        // } else {
+        //     newErrors.password = '';
+        // }
        
 
       
-        if (valid) {
-            let formDataToSend = new FormData();
+        // if (valid) {
+           
           
-            if(formData1.img===undefined && img2===undefined){
-                newErrors.image="please insert a picture";
+            // if(formData1.img===undefined && img2===undefined){
+            //     newErrors.image="please insert a picture";
                 
-            }
-                console.log(img2)
-               console.log(formData1.img);
-             if(img2)
-                  {  
-                    console.log("going to update2");
+            // }
+            //     console.log(img2)
+            //    console.log(formData1.img);
+            //  if(img2)
+            //       {  
+                   const formDataToSend = new FormData();
+                   console.log("going to update2");
                    console.log(formData1)
                     
                    formDataToSend.append('userId', userId);
@@ -139,27 +140,34 @@ const [img2,setimg2]=useState();
                    formDataToSend.append('email', formData1.email);
                    formDataToSend.append('password', formData1.password);
                    formDataToSend.append('image', img2);
-          
-            console.log(formDataToSend)
+                   formDataToSend.append('imageOldPath', formData1.img);
+               
+                   
+                
+
                    const response2= await axios.post('http://localhost:3002/api/Profile/:id',formDataToSend,{ headers: {
                     'Content-Type': 'multipart/form-data'
                   }
                 });
                    setmessage(response2.data.message)
                    
-                    console.log("should be updated")}else{
-                    
-                        const Datatosend2=[ userId,formData1.firstName, formData1.lastName,formData1.email,formData1.password,formData1.img]
-                   const response2= await axios.post('http://localhost:3002/api/Profile/:id',Datatosend2);
-                   setmessage(response2.data.message)
-                   
                     console.log("should be updated")
-                    }
+        // }
+        //     else{
+                    
+            //  const Datatosend2=[ userId,formData1.firstName, formData1.lastName,formData1.email,formData1.password,formData1.img]
+            //  console.log(Datatosend2);
+            //        const response2= await axios.post('http://localhost:3002/api/Profile/:id',Datatosend2);
+            //        setmessage(response2.data.message)
+                   
+            //         console.log("should be updated")
+                //    }
                     
                 
             
            
-        }; setErrors(newErrors);
+        // };
+        // setErrors(newErrors);
       
         
     };
@@ -170,7 +178,7 @@ const [img2,setimg2]=useState();
         <h1>Profile Gestionnaire</h1>
         {message &&<p style={{ backgroundColor: 'lightblue', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' ,width:"80%",textAlign:"center"}}>{message}</p>}
     <main className='Profilemain'>
-       <div className='imageprofile'><img src={img2 ? URL.createObjectURL(img2) : formData1.img?formData1.img :'profile 1.png'}  width="300px" alt="profile"/> <input type='file' onChange={(e)=>setimg2(e.target.files[0])}/>{errors.image && <div className="invalid-feedback">{errors.image}</div>}</div> 
+       <div className='imageprofile'><img src={img2 ? URL.createObjectURL(img2) : formData1.img?`http://localhost:3002/uploads/${formData1.img}`  :'profile 1.png'}  width="300px" alt="profile"/> <input type='file' onChange={(e)=>setimg2(e.target.files[0])}/>{errors.image && <div className="invalid-feedback">{errors.image}</div>}</div> 
     <form onSubmit={handleSubmit} className='Profileform'>
         <div className='Profilegroup'>
     <label htmlFor="firstName" className="Profilelabel">Prénom</label>

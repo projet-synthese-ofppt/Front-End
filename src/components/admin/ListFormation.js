@@ -24,7 +24,7 @@ useEffect(()=>
             axios.get('http://localhost:3002/api/data/formation')
             .then(res =>
                 {
-                   console.log(res.data)
+                   
                     setFormationData(res.data);
                     setSearchedFormation(res.data);
                 }
@@ -80,15 +80,17 @@ useEffect(()=>
         <table>
             <thead>
                 
+               <tr>
                 <th>Titre</th>
                 <th>Domain</th>
                 <th>Date Début</th>
                 <th>Date Fin</th>
                 <th>Action</th>
+               </tr>
 
             </thead>
             <tbody>
-                {searchedFormation.map((i,index) => <tr>
+                {searchedFormation.map((i,index) => <tr key={index}>
                     
                     <td>{i.titre}</td>
                     <td>{i.domain}</td>

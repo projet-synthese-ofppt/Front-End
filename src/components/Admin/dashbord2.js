@@ -336,21 +336,26 @@ export default function Dashbord2(){
          <h4><Link to="/history"> Les plus récents actions <FontAwesomeIcon icon={faArrowRight} style={{marginLeft:"10px"}}/></Link></h4>
  
  <table border="3px">
-   <tr>
-     <th>Action</th>
-     
-     <th>La date d'ffectuation</th>
-   </tr>
-
-  {
-    journal.map((j)=>{
-      return <tr>
+   <thead>
+    <tr>
+      <th>Action</th>
+      
+      <th>La date d'ffectuation</th>
+    </tr>
+   </thead>
+   <tbody>
+   {
+    journal.map((j,index)=>{
+      return <tr key={index}>
         <td>{j.action_details}</td>
         <td>{j.action_date}</td>
       </tr>
 
     })
   }
+   </tbody>
+
+  
 
 
 

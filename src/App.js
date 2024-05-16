@@ -13,6 +13,7 @@ import History from './History';
 import Sidebar from './Sidebar';
 import AdminSection from './AdminSection';
 import AddFormateur from './components/Gestionnaire/Creation_Formateur';
+import MyCalendar from './components/Gestionnaire/GlobalCalendrier';
 
 function App() {
   return <div className='SiteContainer'>
@@ -21,6 +22,8 @@ function App() {
     <Route path="/Login" element={<LoginAdmin/>}></Route>
     <Route path='*' element={<AdminSection/>} ></Route>
     <Route path='/ajouterFormateur' element={<AddFormateur/>}></Route>
+    <Route path='/calendrier' element={<MyCalendar/>} ></Route>
+    
     </Routes>
     
     

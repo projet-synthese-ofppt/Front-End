@@ -12,6 +12,7 @@ import Ajoutergestionnaire from './components/Admin/addGestionnaire';
 import History from './History';
 import Sidebar from './Sidebar';
 import AdminSection from './AdminSection';
+import AddFormateur from './components/Gestionnaire/Creation_Formateur';
 
 function App() {
   return <div className='SiteContainer'>
@@ -19,6 +20,7 @@ function App() {
     <Routes>
     <Route path="/Login" element={<LoginAdmin/>}></Route>
     <Route path='*' element={<AdminSection/>} ></Route>
+    <Route path='/ajouterFormateur' element={<AddFormateur/>}></Route>
     </Routes>
     
     

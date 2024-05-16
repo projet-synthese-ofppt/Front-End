@@ -48,35 +48,32 @@ export default function ListFormateur() {
       .catch((err) => console.error(err));
   }
 
-  function searchedVille(v)
-  {
-    setReset(false)
-    setSelectedVille(v)
-  }
 
-  function searchedCompetence(c)
-  {
-    setReset(false)
-    setSelectedCompetence(c);
-  }
 
-  function searchedEtablissement(e)
-  {
-    setReset(false)
-    setSelectedEtablissement(e);
+  function searchedElement(elementType, elementValue) {
+    switch (elementType) {
+      case 'ville':
+        setSelectedVille(elementValue);
+        break;
+      case 'competence':
+        setSelectedCompetence(elementValue);
+        break;
+      case 'etablissement':
+        setSelectedEtablissement(elementValue);
+        break;
+      case 'Specialite':
+        setSelectedSpecialite(elementValue);
+        break;
+      case 'type':
+        setSelectedType(elementValue);
+        break;
+      default:
+        console.log('error');
+    }
   }
+  
 
-  function searchedSpecialite(e)
-  {
-    setReset(false)
-    setSelectedSpecialite(e);
-  }
 
-  function searchedType(e)
-  {
-    setReset(false)
-    setSelectedType(e);
-  }
   function handleSearch() {
     const T = formateurData.filter((f) => {
       const matchesVille = selectedVille ? f.ville.includes(selectedVille) : true;
@@ -104,6 +101,8 @@ export default function ListFormateur() {
     setSearchedFormateur(formateurData)
   }
 
+  
+
   return (
     <div className="TheContainer">
       <div className="ListGestionnaireContainer">
@@ -114,11 +113,12 @@ export default function ListFormateur() {
             <button className="resetButton" onClick={handleReset} >réinitialiser</button>
           </div>
           <div className="dropListContainer">
-            <DropList paramType={"ville"} searchedVille={searchedVille} reset ={reset} />
-            <DropList paramType={"competence"} searchedCompetence={searchedCompetence} reset ={reset} />
-            <DropList paramType={"etablissement"} searchedEtablissement={searchedEtablissement} reset ={reset} />
-            <DropList paramType={"Specialite"} searchedSpecialite={searchedSpecialite} reset ={reset} />
-            <DropList paramType={"type"} searchedType={searchedType} reset ={reset} />
+            <DropList paramType={"ville"}   searchedElement = {searchedElement} reset ={reset} />
+            <DropList paramType={"competence"}  searchedElement = {searchedElement}  reset ={reset} />
+            <DropList paramType={"etablissement"}  searchedElement = {searchedElement} reset ={reset} />
+            <DropList paramType={"Specialite"}  searchedElement = {searchedElement} reset ={reset} />
+            <DropList paramType={"type"}   searchedElement = {searchedElement} reset ={reset} />
+            
           </div>
         </div>
         <div className="titleContainer">

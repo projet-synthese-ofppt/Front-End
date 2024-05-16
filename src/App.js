@@ -14,6 +14,7 @@ function App() {
     <Routes>
     <Route path="/Login" element={<LoginAdmin/>}></Route>
     <Route path='*' element={<AdminSection/>} ></Route>
+   
     </Routes>
     
     

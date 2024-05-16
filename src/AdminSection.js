@@ -9,6 +9,7 @@ import ListFormateur from './components/Admin/listFormateur';
 import ListFormation from './components/Admin/ListFormation';
 import Ajoutergestionnaire from './components/Admin/addGestionnaire';
 import ProfileGestionnaire from './components/Gestionnaire/ProfileGestionnaire';
+import AffecterFormateur from './components/AffecterFormateur';
 import History from './History';
 
 function AdminSection() {
@@ -22,6 +23,7 @@ function AdminSection() {
     <Route path="/addGestionnaire" element={<Ajoutergestionnaire/>}></Route>
     <Route path="/profilGestionnaire/:id" element={<ProfileGestionnaire/>}></Route>
     <Route path="/history" element={<History/>}></Route>
+    <Route path="/Affecter" element={<AffecterFormateur/>}></Route>
   </Routes></> 
  
   

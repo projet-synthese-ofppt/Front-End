@@ -21,41 +21,50 @@ const Profile = () => {
               navigate("/Login");
                 
             }
-            const response=await axios.get("http://localhost:3002/api/adminId",{
-                headers:{"authorization":`Bearer ${token}`}
-            })
-            setId(response.data.id)
+            const response=await axios.get("http://localhost:3002/api/admin/profile",{
+            headers:{"authorization":`Bearer ${token}`}
+             })
+             console.log(response.data)
+            setId(response.data.person_id)
+
+            setFormData({
+            first_name: response.data.first_name,
+            last_name: response.data.last_name,
+            login: response.data.login,
+            password: response.data.password,
+            });
         }
 
         getAdminId()
     },[navigate])
-    useEffect(() => {
-        const checkAuthentification = async () => {
-            try {
-                const token = localStorage.getItem('token');
-                if (!token) {
-                    navigate("/loginAdmin");
-                }
-            } catch (err) {
-                console.log("Error checking authentication", err);
-                navigate("/loginAdmin");
-            }
-        };
-        checkAuthentification(); 
 
-        const getAdminProfile= async () => {
-            try {
-                console.log(id)
-                const response = await axios.get(`http://localhost:3002/api/Profile/${id}`);
+    // useEffect(() => {
+    //     const checkAuthentification = async () => {
+    //         try {
+    //             const token = localStorage.getItem('token');
+    //             if (!token) {
+    //                 navigate("/loginAdmin");
+    //             }
+    //         } catch (err) {
+    //             console.log("Error checking authentication", err);
+    //             navigate("/loginAdmin");
+    //         }
+    //     };
+    //     checkAuthentification(); 
+
+    //     const getAdminProfile= async () => {
+    //         try {
+    //             console.log(id)
+    //             const response = await axios.get(`http://localhost:3002/api/admin/profile/${id}`);
                 
-                setFormData({first_name : response.data.data.first_name, last_name : response.data.data.last_name,
-                login : response.data.data.login, password : response.data.data.password});
-            } catch (err) {
-                console.log(err);
-            }   
-        };
-        getAdminProfile();  
-    },[navigate,id]);
+    //             setFormData({first_name : response.data.data.first_name, last_name : response.data.data.last_name,
+    //             login : response.data.data.login, password : response.data.data.password});
+    //         } catch (err) {
+    //             console.log(err);
+    //         }   
+    //     };
+    //     getAdminProfile();  
+    // },[navigate,id]);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });

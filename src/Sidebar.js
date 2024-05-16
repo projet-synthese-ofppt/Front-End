@@ -25,9 +25,10 @@ const [prenom,setPrenom]=useState("")
           navigate("/Login");
             
         }
-        const response=await axios.get("http://localhost:3002/api/adminId",{
+        const response=await axios.get("http://localhost:3002/api/admin/profile",{
             headers:{"authorization":`Bearer ${token}`}
         })
+       
        setNom(response.data.last_name)
        setPrenom(response.data.first_name)
     }

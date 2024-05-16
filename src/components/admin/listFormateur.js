@@ -27,7 +27,7 @@ export default function ListFormateur() {
     await axios
       .get("http://localhost:3002/api/data/person/formateur")
       .then(res => {
-        console.log(res.data);
+        
         setFormateurData(res.data);
         setSearchedFormateur(res.data);
       })

@@ -40,7 +40,6 @@ export default function ListGestionnaire()
           })
         .then(res =>
             {
-                console.log(res.data)
                 getData();
             }
         ).catch(err => console.error(err))
@@ -79,14 +78,14 @@ export default function ListGestionnaire()
         <hr />
         <table>
             <thead>
-                <th>Image</th>
-                <th>Matricule</th>
-                <th>Nom Complet</th>
-                <th>Login</th>
-                
-                
-                <th>Date Creation</th>
-                <th>Action</th>
+               <tr>
+                    <th>Image</th>
+                    <th>Matricule</th>
+                    <th>Nom Complet</th>
+                    <th>Login</th>
+                    <th>Date Creation</th>
+                    <th>Action</th>
+               </tr>
 
             </thead>
             <tbody>

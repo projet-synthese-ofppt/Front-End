@@ -1,10 +1,13 @@
 
 import { useState,useEffect } from "react";
+import { useParams } from 'react-router-dom';
 import axios from "axios";
 export default function ListFormateur() {
   const [formateurData, setFormateurData] = useState([]);
   const [searchedFormateur,setSearchedFormateur] = useState([])
 
+  //const FormationId=useParams().id;
+  const FormationId=3;
   useEffect(() => {
     getData();
   },[]);
@@ -24,8 +27,9 @@ let CollectData=[]
     CollectData.push(id)
    
   }
+  const DataTosend={"idformation":FormationId,"idsFormateurs":CollectData};
  const   pushData= async (data)=>{
-    await axios .post("http://localhost:3002/api/participaion",CollectData)
+    await axios .post("http://localhost:3002/api/participaion",DataTosend)
     .then(res=>{
         console.log("done")
     }).catch((error)=>console.log(error));

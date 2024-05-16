@@ -11,12 +11,14 @@ import Ajoutergestionnaire from './components/Admin/addGestionnaire';
 import ProfileGestionnaire from './components/Gestionnaire/ProfileGestionnaire';
 import AffecterFormateur from './components/AffecterFormateur';
 import History from './History';
+import Profile from './components/Admin/Profile';
 
 function AdminSection() {
   return<>
   <Sidebar/>
   <Routes>
     <Route path="/dashboard" element={<Dashbord2/>}></Route>
+    <Route path='/admin/profile' element={<Profile/>}></Route>
     <Route path="/manager" element={<ListGestionnaire/>}></Route>
     <Route path="/trainers" element={<ListFormateur/>}></Route>
     <Route path="/training" element={<ListFormation/>}></Route>

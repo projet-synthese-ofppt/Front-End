@@ -1,5 +1,5 @@
 import './ProfileGestionnaire.css'
- import { useState,useEffect } from "react";
+ import { useState,useEffect } from 'react';
  import { useNavigate, useParams } from 'react-router-dom';
  import axios from 'axios';
 
@@ -232,7 +232,7 @@ const [img2,setimg2]=useState();
                                 placeholder='Mot de passe'
                             />
                             {errors.password && <div className="invalid-feedback">{errors.password}</div>}</div>
-                                                    <button type="submit" className="buttonGestion">Valider les changements</button>
+                                                    <button type="submit" className="buttonGestion">Enregistrer</button>
 
         </form></main></div></div>);
  }

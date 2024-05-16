@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { Route,Routes } from 'react-router-dom';
 import Dashbord2 from './components/Admin/dashbord2';
+import Dashbord2 from './components/Admin/dashbord2';
 
 import LoginAdmin from './components/Admin/LoginAdmin';
 

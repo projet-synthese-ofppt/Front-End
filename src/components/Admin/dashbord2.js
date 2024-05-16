@@ -2,6 +2,7 @@ import React, { useEffect, useState }from "react";
 import Chart from "react-apexcharts";
 import "./dashbord2.css";
 import Sidebar from "../../Sidebar";
+import { Link } from 'react-router-dom';
 
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -12,6 +13,7 @@ import axios from "axios";
 
 
 export default function Dashbord2(){
+  const [journal,setJournal]=useState([])
 
   const [chartFormation,setChartFormation]=useState({
     options: {
@@ -160,14 +162,18 @@ export default function Dashbord2(){
         const formateursData = response.data.formateurs[0];
         let office=0;
         let guest=0;
+        
         formateursData.forEach((f) => {
-          if(f.more_informations.type==="guest")
-            office+=1
+          if(f.type==="guest")
+            guest+=1
           else
-          guest+=1
+          office+=1
+          
         });
 
-       setChartFormateur({...chartFormateur,series:[office+guest,guest,office]})
+        const total=response.data.formateurOffice[0][0].c1+response.data.formateurGuest[0][0].c2
+
+        setChartFormateur({...chartFormateur,series:[response.data.formateurOffice[0][0].c1,response.data.formateurGuest[0][0].c2,total]})
   
         const compSet = new Set();
         formateursData.forEach((f) => {
@@ -250,6 +256,36 @@ export default function Dashbord2(){
         series: [30, 25, 5]
       })
       
+      useEffect(() => {
+        const getHistory = async () => {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                navigate("/Login");
+                return; 
+            }
+            try {
+                const response = await axios.get("http://localhost:3002/api/history", {
+                    headers: {
+                        "authorization": `Bearer ${token}`
+                    }
+                });
+               
+                const sortedEntries = response.data.adminHistory.sort((a, b) => {
+                  return new Date(b.action_date) - new Date(a.action_date);
+              });
+      
+              
+              const latestEntries = sortedEntries.slice(0, 11);
+      
+              setJournal(latestEntries);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+    
+        getHistory();
+    
+    }, [navigate]);
       
       
  return <div className="mydashbordContainer">
@@ -297,7 +333,7 @@ export default function Dashbord2(){
             
          </div>
          <div className="myjournalDashbord">
-         <h4><a href=""> Les plus récents actions <FontAwesomeIcon icon={faArrowRight} style={{marginLeft:"10px"}}/></a></h4>
+         <h4><Link to="/history"> Les plus récents actions <FontAwesomeIcon icon={faArrowRight} style={{marginLeft:"10px"}}/></Link></h4>
  
  <table border="3px">
    <tr>
@@ -305,34 +341,20 @@ export default function Dashbord2(){
      
      <th>La date d'ffectuation</th>
    </tr>
-   <tr>
-     <td>Le gestionnaire Ahmed Alaoui a ajouté une nouvelle formation "JavaScript advancer"</td>
-   <td>24/04/2024</td>
-   </tr>
-   <tr>
-     <td>Le gestionnaire Ahmed Alaoui a ajouté une nouvelle formation "JavaScript advancer"</td>
-   <td>24/04/2024</td>
-   </tr>
-   <tr>
-     <td>Le gestionnaire Ahmed Alaoui a ajouté une nouvelle formation "JavaScript advancer"</td>
-   <td>24/04/2024</td>
-   </tr>
-   <tr>
-     <td>Le gestionnaire Ahmed Alaoui a ajouté une nouvelle formation "JavaScript advancer"</td>
-   <td>24/04/2024</td>
-   </tr>
-   <tr>
-     <td>Le gestionnaire Ahmed Alaoui a ajouté une nouvelle formation "JavaScript advancer"</td>
-   <td>24/04/2024</td>
-   </tr>
-   <tr>
-     <td>Le gestionnaire Ahmed Alaoui a ajouté une nouvelle formation "JavaScript advancer"</td>
-   <td>24/04/2024</td>
-   </tr>
-   <tr>
-     <td>Le gestionnaire Ahmed Alaoui a ajouté une nouvelle formation "JavaScript advancer"</td>
-   <td>24/04/2024</td>
-   </tr>
+
+  {
+    journal.map((j)=>{
+      return <tr>
+        <td>{j.action_details}</td>
+        <td>{j.action_date}</td>
+      </tr>
+
+    })
+  }
+
+
+
+
  </table>
          </div>
 

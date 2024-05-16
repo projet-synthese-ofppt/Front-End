@@ -6,6 +6,8 @@
     flex-direction: column;
     width: 100%;
    
+    width: 100%;
+   
   
 
 }
@@ -30,7 +32,7 @@
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
    
 width: 605px;
-height: 539px;
+height: 510px;
 }
 .LoginForm{
     display: flex;

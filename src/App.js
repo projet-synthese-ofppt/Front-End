@@ -1,40 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
-import { Route,Routes } from 'react-router-dom';
-import Dashbord2 from './components/Admin/dashbord2';
-
-import LoginAdmin from './components/Admin/LoginAdmin';
-import ListGestionnaire from './components/Admin/ListGestionnaire';
-import ListFormateur from './components/Admin/listFormateur';
-import ListFormation from './components/Admin/ListFormation';
-import Ajoutergestionnaire from './components/Admin/addGestionnaire';
-// import ProfileGestionnaire from './components/Gestionnaire/ProfileGestionnaire';
-import History from './History';
-import Sidebar from './Sidebar';
-import AdminSection from './AdminSection';
-import AddFormateur from './components/Gestionnaire/Creation_Formateur';
-import MyCalendar from './components/Gestionnaire/GlobalCalendrier';
+import logo from "./logo.svg";
+import "./App.css";
+import { Route, Routes } from "react-router-dom";
+import GestionnaireLogin from "./components/Gestionnaire/GestionnaireLogin";
+import GestionnaireSection from "./GestionnaireSection";
 
 function App() {
-  return <div className='SiteContainer'>
-    
-    <Routes>
-    <Route path="/Login" element={<LoginAdmin/>}></Route>
-    <Route path='*' element={<AdminSection/>} ></Route>
-    <Route path='/ajouterFormateur' element={<AddFormateur/>}></Route>
-    <Route path='/calendrier' element={<MyCalendar/>} ></Route>
-    
-    </Routes>
-    
-    
+  return (
+    <div className="SiteContainer">
+      <Routes>
+        <Route
+          path="/GestionnaireLogin"
+          element={<GestionnaireLogin />}
+        ></Route>
+        <Route path="*" element={<GestionnaireSection />}></Route>
+      </Routes>
 
-
-    {/* <Routes>
+      {/* <Routes>
       <Route path='*' element={<AdminSection/>}></Route>
     </Routes> */}
-  </div>
-  
- 
+    </div>
+  );
 }
 
 export default App;

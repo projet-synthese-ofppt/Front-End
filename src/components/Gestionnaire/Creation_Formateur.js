@@ -2,7 +2,7 @@ import { useState,useRef } from "react"
 import './Creation_Formateur.css'
 import DropList from "../subComponents/dropList";
 import axios from "axios";
-
+import MultiDropList from "../subComponents/multiDropList";
 
 export default function AddFormateur()
 {
@@ -29,6 +29,7 @@ export default function AddFormateur()
 
     //Drop list data stocking
     function searchedElement(elementType, elementValue) {
+        
         setFormateurData(prevState => ({...prevState, [elementType]:elementValue}))
     }
         
@@ -70,6 +71,13 @@ export default function AddFormateur()
             
         }
 
+        function selectedMulti(x)
+        {
+            console.log(x);
+            let T  =  x.map( x => x.value);
+           
+            console.log(T);
+        }
     
 
     return <div className="addFormateurContainer">
@@ -110,13 +118,20 @@ export default function AddFormateur()
                 </div>
 
                 <div className="inputSubContainer">
-                    <label htmlFor="">Expériences</label>
+                    <label htmlFor="">Expérience(s)</label>
                     <textarea className="addFormateurTextArea" name="experience" id="experience" rows='10' cols='5'  onChange={handleChangeDetails} ></textarea>
                     <p id="addFormateurTextAreaHint">Pour ajouter plusieurs expériences, écrivez chacune dans une nouvelle ligne</p>
                 </div>
 
+                <div className="inputSubContainer">
+                <MultiDropList paramType={"competence"} selectedMulti = {selectedMulti}/>
+                </div>
+
                 <DropList paramType = 'type' searchedElement = {searchedElement} />
                 <DropList paramType = 'etablissement' searchedElement = {searchedElement} />
+               
+                
+
             </div>
 
             <input type="submit" value="Valider" />

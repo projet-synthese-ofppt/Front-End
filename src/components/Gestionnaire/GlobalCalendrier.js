@@ -20,6 +20,7 @@ function MyCalendar() {
       try {
         const response = await axios.get("http://localhost:3002/api/calendrier");
         const data = response.data.formation;
+        console.log(data)
 
         const convertedEvents = data.flatMap((event) => {
           const color=getRandomColor()
@@ -31,7 +32,7 @@ function MyCalendar() {
             const startDate = new Date(year, month - 1, day, startHour, startMinute);
             const endDate = new Date(year, month - 1, day, endHour, endMinute);
             return {
-              id: event.id,
+              
               title: event.titre,
               start: startDate,
               end: endDate,
@@ -41,6 +42,7 @@ function MyCalendar() {
         });
 
         setConvertedData(convertedEvents);
+        console.log(convertedEvents)
       } catch (err) {
         console.log(err);
       } finally {
@@ -70,7 +72,7 @@ function MyCalendar() {
 
   return (
     <div className='GlobalCalender'>
-      <div className='menu'></div>
+      
       <div className='mycalender'>
         <h1 className='titleCalendrier'>Calendrier des formations</h1>
         {!loading && (

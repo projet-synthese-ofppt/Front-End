@@ -11,6 +11,7 @@ import Ajoutergestionnaire from './components/Admin/addGestionnaire';
 import ProfileGestionnaire from './components/Gestionnaire/ProfileGestionnaire';
 import History from './History';
 import Profile from './components/Admin/Profile';
+import MyCalendar from './components/Gestionnaire/GlobalCalendrier';
 
 function AdminSection() {
   return<>
@@ -24,6 +25,7 @@ function AdminSection() {
     <Route path="/addGestionnaire" element={<Ajoutergestionnaire/>}></Route>
     <Route path="/profilGestionnaire/:id" element={<ProfileGestionnaire/>}></Route>
     <Route path="/history" element={<History/>}></Route>
+    <Route path='/calendrier' element={<MyCalendar/>} ></Route>
   </Routes></> 
  
   

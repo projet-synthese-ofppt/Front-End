@@ -20,7 +20,7 @@ function App() {
     <Routes>
     <Route path="/Login" element={<LoginAdmin/>}></Route>
     <Route path='*' element={<AdminSection/>} ></Route>
-    <Route path='/calendrier' element={<MyCalendar/>} ></Route>
+   
     
     </Routes>
     

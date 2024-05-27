@@ -1,0 +1,87 @@
+.form-container-contenu {
+  margin: auto;
+  padding: 20px;
+  width: 150%;
+}
+
+.titre-new {
+  text-align: center;
+  color: black;
+  font-family: 'Arial', sans-serif; 
+  font-weight: bold;
+  font-size: 25px; 
+  margin: auto;
+}
+.modal-body-contenu {
+    position: relative;
+    flex: 1 1 auto;
+    margin: auto;
+}
+
+.contenu-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 16px;
+  color: #00000096; 
+  font-weight: 550;
+}
+.optionContenu , .imagecontenu{
+  color: #000000d1;
+}
+.form-container-input{
+  width: 70%;
+  display: block;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid rgb(81 87 95 / 25%);
+  border-radius: 10px; 
+  font-size: 16px;
+}
+
+.error-new-contenu {
+  color: red;
+  font-size: 0.9em;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.form-container-button {
+  width: 50%;
+  padding: 10px ;
+  border: none;
+  border-radius: 10px;
+  background-color: #02a405;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  margin:0 5px;
+}
+
+.form-container-reset {
+  width: 50%;
+  padding: 10px ;
+  border: none;
+  border-radius: 10px;
+  background-color: red;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  margin:0 5px;
+}
+
+.form-container-button:hover {
+  background-color: #218838;
+}
+
+.form-container-reset:hover {
+  background-color: #c82333;
+}
+
+
+.form-button-ges {
+  display: flex;
+  justify-content: center;
+  width: 70%;
+  /* padding:0 30px; */
+}

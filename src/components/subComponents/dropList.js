@@ -30,7 +30,7 @@ export default function DropList(props)
             props.searchedElement(paramType,e.target.value)
         else if(paramType === "etablissement")
             props.searchedElement(paramType,e.target.value)
-        else if(paramType === "Specialite")
+        else if(paramType === "specialite")
             props.searchedElement(paramType,e.target.value)
         else if(paramType === "type")
             props.searchedElement(paramType,e.target.value)
@@ -42,7 +42,7 @@ export default function DropList(props)
         axios.get(`http://localhost:3002/api/data/parameter/${paramType}`)
         .then(res =>
             {
-                
+               
                 setLabel(res.data.parameter);
                 setDroppedData(res.data.param_data);
             }

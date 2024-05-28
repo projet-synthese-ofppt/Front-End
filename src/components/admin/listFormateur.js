@@ -27,7 +27,7 @@ export default function ListFormateur() {
     await axios
       .get("http://localhost:3002/api/data/person/formateur")
       .then(res => {
-        
+        console.log(res.data)
         setFormateurData(res.data);
         setSearchedFormateur(res.data);
        
@@ -106,22 +106,21 @@ export default function ListFormateur() {
   //   setSelectedType(e);
   // }
   function handleSearch() {
-    // const T = formateurData.filter((f) => {
-    //   const matchesVille = selectedVille ? f.ville.includes(selectedVille) : true;
-    //   const matchesEtablissement = selectedEtablissement ? f.nom.includes(selectedEtablissement) : true;
-    //   const matchesSpecialite = selectedSpecialite ? f.more_informations.specialite.includes(selectedSpecialite) : true;
-    //   const matchesType = selectedType ? f.type.includes(selectedType.toLowerCase()) : true;
-    //   const matchesFormateurName = selectedFormateurName ? (f.first_name.toLowerCase() +' '+ f.last_name.toLowerCase()).includes(selectedFormateurName.toLowerCase()) : true;
-    //   const matchesCompetence = selectedCompetence ? f.more_informations.compethences.includes(selectedCompetence) : true;
+    const T = formateurData.filter((f) => {
+      const matchesVille = selectedVille ? f.ville.includes(selectedVille) : true;
+      const matchesEtablissement = selectedEtablissement ? f.nom.includes(selectedEtablissement) : true;
+      const matchesSpecialite = selectedSpecialite ? f.more_informations.specialite.includes(selectedSpecialite) : true;
+      const matchesType = selectedType ? f.type.includes(selectedType.toLowerCase()) : true;
+      const matchesFormateurName = selectedFormateurName ? (f.first_name.toLowerCase() +' '+ f.last_name.toLowerCase()).includes(selectedFormateurName.toLowerCase()) : true;
+      const matchesCompetence = selectedCompetence ? f.more_informations.compethences.includes(selectedCompetence) : true;
   
-    //   return matchesVille && matchesEtablissement && matchesSpecialite && matchesType && matchesFormateurName && matchesCompetence;
-    // });
+      return matchesVille && matchesEtablissement && matchesSpecialite && matchesType && matchesFormateurName && matchesCompetence;
+    });
   
-    // setSearchedFormateur(T);
+    setSearchedFormateur(T);
 
-    // console.log(selectedVille);
-    // console.log(selectedSpecialite);
-    // console.log(selecte)
+   
+   
   }
 
   function handleReset()
@@ -192,9 +191,10 @@ export default function ListFormateur() {
                   <td>{i.login}</td>
                   <td>{i.more_informations.specialite}</td>
                   <td>{i.nom}</td>
+                 
                   <td>{i.ville}</td>
                   <td>{i.type}</td>
-                  <td>{i.more_informations.competence.split('\r\n').map((x,index) => <li key={index} style={{listStyle:'none'}}>{x}</li>)}</td>
+                  <td>{i.more_informations.competence.map((x,index) => <li key={index} style={{listStyle:'none'}}>{x}</li>)}</td>
                   <td>{i.more_informations.experience.split('\r\n').map((x,index) => <li key={index} style={{listStyle:'none'}}>{x}</li>)}</td>
                   <td className="ListgestionnaireActions">
                     <Link to ={`/editFormateur/${i.person_id}`} ><img src="/media/edit.png" alt=""  width="19px" /></Link>

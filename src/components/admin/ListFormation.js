@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import Sidebar from "../../Sidebar";
 import axios from "axios";
 import DropList from "../subComponents/dropList";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/free-regular-svg-icons';
 
 
 export default function ListFormation()
@@ -104,6 +106,7 @@ useEffect(()=>
     if (confirmDelete) {
         handleClick(i.id);
     }}} ><img src="/media/delete.png" alt="" width='19px' /></button>
+                     <Link to={`/profilFormation/${i.id}`}> <FontAwesomeIcon icon={faEye} style={{color:"gray",fontWeight:"bold"}}/></Link>
                     </td>
                 </tr>)}
             </tbody>

@@ -1,0 +1,23 @@
+.AffecterformateurContainer {
+
+
+}
+
+ .search {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.searchInput {
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.titleFormateurs {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+} 

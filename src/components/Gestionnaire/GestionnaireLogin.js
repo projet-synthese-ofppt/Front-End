@@ -1,83 +1,119 @@
 import { useState } from "react";
-import axios from "axios"
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "./login.css";
+
 export default function GestionnaireLogin() {
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
+  // State variables
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({ email: "", password: "" });
+  const [errorMessage, setErrorMessage] = useState("");
 
-    // les variables
-    const [email, setemail] = useState('');
-    const [password, setPassword] = useState('');
-    const [errors, setErrors] = useState({email:'',password:''});
+  // Validation function
+  const validation = async (e) => {
+    e.preventDefault();
 
+    let valid = true;
+    const Errors = { ...errors };
 
-    // validation 
-
-    const validation = async (e) =>{
-        e.preventDefault();
-
-        let valid = true
-        const Errors = {...errors};
-        if(!email.trim()){
-            Errors.email = "entrer votre email"
-            valid = false 
-        }
-        else{
-            Errors.username = ""
-        }
-
-        if (!password.trim()) {
-          Errors.password = "entrer votre mot de passe";
-          valid = false;
-        } else {
-          Errors.password = "";
-        }
-        setErrors(Errors);
-
-        if(valid){
-         
-            await axios.post("http://localhost:3002/api/GestionnaireLogin",{email,password})
-              .then((res) => {
-                const token = res.data.token;
-                localStorage.setItem("token", token);
-                navigate("/Creation_Formation");
-                console.log(token);
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-        }
+    if (!email.trim()) {
+      Errors.email =
+        "Veuillez saisir votre adresse e-mail. Ce champ est obligatoire";
+      valid = false;
+    } else {
+      Errors.email = "";
     }
-    
-    
-    
-    return (
-      <>
-        <section>
-          <h1>se connecter</h1>
-          <form onSubmit={validation}>
-            <label htmlFor="email"> Email : </label>
-            <input
-              type="text"
-              id="email"
-              name="email"
-              placeholder="email"
-              onChange={(e) => setemail(e.target.value)}
-            />
-            {errors.email}
 
-            <label htmlFor="password"> mot de passe : </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              placeholder="password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            {errors.password}
-            <button type="submit">se connecter </button>
-          </form>
-        </section>
-      </>
-    );
+    if (!password.trim()) {
+      Errors.password =
+        "Veuillez entrer votre mot de passe. Ce champ est obligatoire.";
+      valid = false;
+    } else {
+      Errors.password = "";
+    }
+
+    setErrors(Errors);
+
+    if (valid) {
+      try {
+        const response = await axios.post(
+          "http://localhost:3002/api/GestionnaireLogin",
+          { email, password }
+        );
+        const { token, profil } = response.data;
+        localStorage.setItem("token", token);
+
+        if (profil === "gestionnaire") {
+          navigate("/globalCalender");
+        } else if (profil === "formateur") {
+         navigate("/formateurCalender"); 
+         
+        }
+
+        console.log(token);
+      } catch (error) {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.message
+        ) {
+          setErrorMessage(error.response.data.message);
+        } else {
+          setErrorMessage("Une erreur est survenue lors de la connexion.");
+        }
+        console.log(error);
+      }
+    }
+  };
+
+  return (
+    <div className="imageAndLogin">
+      <div className="imageAdminSection">
+    <img src="OFPPT.png" alt="" width="150"/>
+    </div>
+    <div className="globalContainerGestionnaire">
+      
+    <section className="login-section">
+      {errorMessage && (
+        <div className="errordiv alert alert-danger">{errorMessage}</div>
+      )}
+      <h1 className="titre">Se connecter</h1>
+      <form className="login-form" onSubmit={validation}>
+        <label className="form-label-login" htmlFor="email">
+          Email :
+        </label>
+        <input
+          className="form-input-login"
+          type="text"
+          id="email"
+          name="email"
+          placeholder="Email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <span className="form-error-login">{errors.email}</span>
+
+        <label className="form-label-login" htmlFor="password">
+          Mot de passe :
+        </label>
+        <input
+          className="form-input-login"
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Mot de passe"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <span className="form-error-login">{errors.password}</span>
+
+        <button className="form-button-login" type="submit">
+          Se connecter
+        </button>
+      </form>
+    </section>
+    </div>
+    </div>
+  );
 }

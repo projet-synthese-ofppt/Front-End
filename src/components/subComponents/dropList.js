@@ -22,25 +22,27 @@ export default function DropList(props)
     {
         
         setSelectedValue(e.target.value);
+
         
         if(paramType === "ville")
-            props.searchedVille(e.target.value)
+            props.searchedElement(paramType,e.target.value)
         else if(paramType === "competence")
-            props.searchedCompetence(e.target.value)
+            props.searchedElement(paramType,e.target.value)
         else if(paramType === "etablissement")
-            props.searchedEtablissement(e.target.value)
+            props.searchedElement(paramType,e.target.value)
         else if(paramType === "Specialite")
-            props.searchedSpecialite(e.target.value)
+            props.searchedElement(paramType,e.target.value)
         else if(paramType === "type")
-            props.searchedType(e.target.value)
+            props.searchedElement(paramType,e.target.value)
         
     }    
+
     useEffect( () =>
     {
         axios.get(`http://localhost:3002/api/data/parameter/${paramType}`)
         .then(res =>
             {
-                
+               
                 setLabel(res.data.parameter);
                 setDroppedData(res.data.param_data);
             }
@@ -51,6 +53,8 @@ export default function DropList(props)
             }
         )
     },[paramType])
+
+    
     return <div className="dropList">
         <label className="dropListLabel" htmlFor="">{label}:</label>
         <select className="dropListSelect" name="" id="" onChange={handleDropListChange} value={selectedValue}>

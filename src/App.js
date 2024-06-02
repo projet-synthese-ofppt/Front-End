@@ -1,30 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
-import { Route,Routes } from 'react-router-dom';
-import Dashbord2 from './components/Admin/dashbord2';
-
-
-import LoginAdmin from './components/Admin/LoginAdmin';
-
-
-import AdminSection from './AdminSection';
-
-import Affecterformateur from './components/AffecterFormateur';
-
+import logo from "./logo.svg";
+import "./App.css";
+import { Route, Routes } from "react-router-dom";
+import GestionnaireLogin from "./components/Gestionnaire/GestionnaireLogin";
+import GestionnaireSection from "./GestionnaireSection";
+import AdminSection from "./AdminSection";
+import LoginAdmin from "./components/Admin/LoginAdmin";
 
 function App() {
-  return <div className='SiteContainer'>
- <Routes>
-    {/* <Route path="/Login" element={<LoginAdmin/>}></Route>
-    <Route path='*' element={<AdminSection/>} ></Route> */}
-   <Route path='/Affecter' element={<Affecterformateur/>} ></Route>
-    </Routes> 
-    
-    
-    
-  </div>
-  
- 
+  return (
+    <div className="SiteContainer">
+      <Routes>
+        {/* <Route path="/adminLogin" element={<LoginAdmin/>}></Route> */}
+        <Route path="/GestionnaireLogin" element={<GestionnaireLogin />}></Route>
+        <Route path="*" element={<GestionnaireSection />}></Route>
+        {/* <Route path='*' element={<AdminSection/>}></Route> */}
+    </Routes>
+    </div>
+  );
 }
 
 export default App;

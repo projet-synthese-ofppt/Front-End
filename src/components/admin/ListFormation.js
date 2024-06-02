@@ -104,6 +104,7 @@ useEffect(()=>
     if (confirmDelete) {
         handleClick(i.id);
     }}} ><img src="/media/delete.png" alt="" width='19px' /></button>
+                     <Link to={`/profilFormation/${i.id}`}> <img src="/media/edit.png" alt="" width='19px' /></Link>
                     </td>
                 </tr>)}
             </tbody>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import FormateurResponsable from "./FormateurResponsable";
 import { Button } from 'react-bootstrap';
 
-export default function Test(){
+export default function ButtonFormateurResponsable(){
     const [modalShow, setModalShow] = useState(false);
     const [message,setMessage]=useState("")
     function AfficherMessage(msg){

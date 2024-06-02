@@ -19,7 +19,7 @@ const Sidebar_Gestionnaire = () => {
       <div className="menu-title">MENU</div>
       <ul className="menu-items">
         <li>
-          <Link to="/emploi">
+          <Link to="/globalCalender">
             <img src="calendar.png" alt="emploi" className="imageSide" />
             Emploi du temps
           </Link>
@@ -54,14 +54,19 @@ const Sidebar_Gestionnaire = () => {
                 Ajouter Formation
               </Link>
             </li>
+            <li>
+              <Link to="/ajouterFormateur">
+                <img
+                  src="student.png"
+                  alt="education"
+                  className="imageSide"
+                />
+                Ajouter Formateur
+              </Link>
+            </li>
           </ul>
         </li>
-        <li>
-          <Link to="/history">
-            <img src="historique.png" alt="temps" className="imageSide" />
-            Historique
-          </Link>
-        </li>
+        
       </ul>
 
       <div className="user-info">

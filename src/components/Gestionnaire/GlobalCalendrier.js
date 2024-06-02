@@ -20,11 +20,13 @@ function MyCalendar() {
       try {
         const response = await axios.get("http://localhost:3002/api/calendrier");
         const data = response.data.formation;
-        console.log(data)
+        
 
         const convertedEvents = data.flatMap((event) => {
+         
           const color=getRandomColor()
-          const { planification } = event;
+          const planification  = event.planification;
+          
           return planification.map((p) => {
             const [year, month, day] = p.jour.split('-');
             const [startHour, startMinute] = p.heure.from.split(':');

@@ -10,13 +10,16 @@ import Creation_Formation from './components/Gestionnaire/Creation_Formation';
 import Contenu from "./components/Gestionnaire/contenu"
 import Creer_Contenu from './components/Gestionnaire/creer_contenu'
 import AddFormateur from './components/Gestionnaire/Creation_Formateur';
+import MyCalendar from './components/Gestionnaire/GlobalCalendrier';
+import FormateurCalender from './components/Formateur/formateurCalender';
+import  ProfilFormation from "./components/Gestionnaire/ProfilFormation";
 
 function GestionnaireSection() {
   return (
     <>
       <Sidebar_Gestionnaire />
       <Routes>
-        <Route path="/emploi" element={<Emploi />}></Route>
+        <Route path="/globalCalender" element={<MyCalendar/>}></Route>
         <Route path="/trainers" element={<ListFormateur />}></Route>
         <Route path="/manager" element={<ListGestionnaire />}></Route>
         <Route path="/training" element={<ListFormation />}></Route>
@@ -28,6 +31,10 @@ function GestionnaireSection() {
         <Route path="/contenu" element={<Contenu />}></Route>
         <Route path="/history" element={<History />}></Route>
         <Route path="/creer_contenu" element={<Creer_Contenu />}></Route>
+        <Route path="/formateurCalender" element={<FormateurCalender />}></Route>
+        <Route path="/detail/:id" element={<ProfilFormation />} />
+        
+        <Route path="/profilFormation/:id" element={<ProfilFormation/>}></Route>
       </Routes>
     </>
   );

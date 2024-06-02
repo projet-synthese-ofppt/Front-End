@@ -25,8 +25,6 @@ export default function GestionnaireLogin() {
       valid = false;
     } else {
       Errors.email = "";
-      valid = true;
-
     }
 
     if (!password.trim()) {
@@ -35,21 +33,26 @@ export default function GestionnaireLogin() {
       valid = false;
     } else {
       Errors.password = "";
-      valid = true;
-
     }
 
     setErrors(Errors);
-console.log(valid);
+
     if (valid) {
       try {
         const response = await axios.post(
           "http://localhost:3002/api/GestionnaireLogin",
           { email, password }
         );
-        const token = response.data.token;
+        const { token, profil } = response.data;
         localStorage.setItem("token", token);
-        navigate("/Creation_Formation");
+
+        if (profil === "gestionnaire") {
+          navigate("/globalCalender");
+        } else if (profil === "formateur") {
+         navigate("/formateurCalender"); 
+         
+        }
+
         console.log(token);
       } catch (error) {
         if (
@@ -67,6 +70,12 @@ console.log(valid);
   };
 
   return (
+    <div className="imageAndLogin">
+      <div className="imageAdminSection">
+    <img src="OFPPT.png" alt="" width="150"/>
+    </div>
+    <div className="globalContainerGestionnaire">
+      
     <section className="login-section">
       {errorMessage && (
         <div className="errordiv alert alert-danger">{errorMessage}</div>
@@ -104,5 +113,7 @@ console.log(valid);
         </button>
       </form>
     </section>
+    </div>
+    </div>
   );
 }

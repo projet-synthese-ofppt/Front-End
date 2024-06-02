@@ -61,7 +61,6 @@ function Contenu(props) {
       const filteredData = response.data.filter(
         (item) =>
           item.type.toLowerCase().includes(mot_recherche.toLowerCase()) ||
-          item.categorie.toLowerCase().includes(mot_recherche.toLowerCase()) ||
           item.description.toLowerCase().includes(mot_recherche.toLowerCase())
       );
       setresultatdata(filteredData);
@@ -128,7 +127,6 @@ function Contenu(props) {
                   <tr>
                     <th className="first-colmn">Description</th>
                     <th className="first-colmn">Type</th>
-                    <th className="first-colmn">Categorie</th>
                     <th className="first-colmn">Action</th>
                   </tr>
                 </thead>
@@ -137,7 +135,6 @@ function Contenu(props) {
                     <tr key={item.id}>
                       <td className="first-colmn">{item.description}</td>
                       <td className="first-colmn">{item.type}</td>
-                      <td className="first-colmn">{item.categorie}</td>
                       <td className="first-colmn">
                         <button
                           type="button"

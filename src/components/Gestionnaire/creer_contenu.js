@@ -13,8 +13,7 @@ export default function Creer_Contenu(props) {
     description: "",
     type: "",
     source: null,
-    categorie: "",
-    domain: "",
+    
   });
 
   const [Errorsmessage, setErrorsMessage] = useState("");
@@ -23,8 +22,7 @@ export default function Creer_Contenu(props) {
     descriptionError: "",
     typeError: "",
     sourceError: null,
-    categorieError: "",
-    domainError: "",
+  
   });
 
   function handleronchange(name, value) {
@@ -90,19 +88,8 @@ export default function Creer_Contenu(props) {
         Errors.sourceError = "";
       }
 
-      if (!contenu.categorie.trim()) {
-        Errors.categorieError = "Veuillez saisir une categorie";
-        valid = false;
-      } else {
-        Errors.categorieError = "";
-      }
-
-      if (!contenu.domain.trim()) {
-        Errors.domainError = "Veuillez saisir un domaine.";
-        valid = false;
-      } else {
-        Errors.domainError = "";
-      }
+      
+      
 
       setErrors({ ...Errors });
 
@@ -112,8 +99,7 @@ export default function Creer_Contenu(props) {
           formData.append("description", contenu.description);
           formData.append("type", contenu.type);
           formData.append("source", contenu.source);
-          formData.append("categorie", contenu.categorie);
-          formData.append("domain", contenu.domain);
+          
 
           const response = await axios.post(
             "http://localhost:3002/api/creer_contenu",
@@ -212,27 +198,9 @@ export default function Creer_Contenu(props) {
             <span className="error-new-contenu">{errors.sourceError}</span>
           )}
 
-          <label className="contenu-label">Categorie :</label>
-          <input
-            type="text"
-            name="categorie"
-            className="form-container-input"
-            onChange={(e) => handleronchange(e.target.name, e.target.value)}
-          />
-          {errors.categorieError && (
-            <span className="error-new-contenu">{errors.categorieError}</span>
-          )}
+         
 
-          <label className="contenu-label">Domain :</label>
-          <input
-            name="domain"
-            className="form-container-input"
-            type="text"
-            onChange={(e) => handleronchange(e.target.name, e.target.value)}
-          />
-          {errors.domainError && (
-            <span className="error-new-contenu">{errors.domainError}</span>
-          )}
+          
 
           <div className="form-button-ges">
             <button

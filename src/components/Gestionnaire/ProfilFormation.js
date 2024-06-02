@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import ButtonFormateurResponsable from './ButtonFormateurResponsable';
+import ButtonFormation from './buttonEmploi';
+import Affecterformateur from './AffecterFormateur';
 
 const ProfilFormation = () => {
   const { id } = useParams();
@@ -62,8 +64,7 @@ const ProfilFormation = () => {
       <div className="image-container" style={{backgroundImage:"url(/../formation.jpeg)",backgroundRepeat:"no-repeat",backgroundSize:"cover"}}>
          <div className='mybuttonsFormations'>
          <ButtonFormateurResponsable/>
-         <ButtonFormateurResponsable/>
-         <ButtonFormateurResponsable/>
+         <Affecterformateur/>
          </div>
        
         <p className="centered-paragraph">Bienvenue à la {formData.titre}</p>
@@ -73,7 +74,8 @@ const ProfilFormation = () => {
       <div className="navbar">
         <Link to={`/detail/${id}`}>Détail</Link>
         <Link to={`/formateur/${id}`}>Formateur</Link>
-        <Link to={`/emploi/${id}`}>Emploi</Link>
+        <ButtonFormation/>
+       
       </div>
       <div className="formation-card-p">
         <h2>{formData.titre}</h2>

@@ -15,7 +15,7 @@ const [prenom,setPrenom]=useState("")
       
       localStorage.removeItem('token');
       
-      navigate("/login");
+      navigate("/adminLogin");
     
   }
   useEffect(()=>{

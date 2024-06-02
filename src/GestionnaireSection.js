@@ -9,6 +9,7 @@ import History from './History';
 import Creation_Formation from './components/Gestionnaire/Creation_Formation';
 import Contenu from "./components/Gestionnaire/contenu"
 import Creer_Contenu from './components/Gestionnaire/creer_contenu'
+import AddFormateur from './components/Gestionnaire/Creation_Formateur';
 
 function GestionnaireSection() {
   return (
@@ -23,6 +24,7 @@ function GestionnaireSection() {
           path="/Creation_Formation"
           element={<Creation_Formation />}
         ></Route>
+        <Route path='/ajouterFormateur' element={<AddFormateur/>}></Route>
         <Route path="/contenu" element={<Contenu />}></Route>
         <Route path="/history" element={<History />}></Route>
         <Route path="/creer_contenu" element={<Creer_Contenu />}></Route>

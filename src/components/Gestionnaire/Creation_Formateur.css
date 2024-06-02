@@ -1,4 +1,141 @@
-#addFormateurImage
+#multiDrop
 {
-    width: 100px;
+    
+    display: flex;
+    justify-content: end;
+
 }
+
+.addFormateurContainer {
+    width: 60%;
+    margin: auto;
+    padding: 20px;
+    background: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    font-family: Arial, sans-serif;
+}
+
+.addFormateurTitle {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.addFormateurForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.addFormateurImageContainer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#addFormateurImage {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid #ddd;
+    transition: border-color 0.3s;
+}
+
+#addFormateurImage:hover {
+    border-color: #007BFF;
+}
+
+.addFormteurInputsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.inputSubContainer {
+    flex: 1 1 45%;
+    display: flex;
+    flex-direction: column;
+    
+    
+}
+
+.addFormateurLabel {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.addFormateurInput,
+.addFormateurTextArea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.addFormateurInput:focus,
+.addFormateurTextArea:focus {
+    border-color: #007BFF;
+}
+
+.addFormateurTextArea {
+    resize: vertical;
+}
+
+.addFormateurHint {
+    font-size: 12px;
+    color: #888;
+    margin-top: 5px;
+}
+
+.addFormateurSubmit {
+    padding: 10px 20px;
+    background: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.addFormateurSubmit:hover {
+    background: #0056b3;
+}
+
+.addFormateurAlert {
+    color: #28a745;
+    text-align: center;
+    font-weight: bold;
+}
+
+.addFormateurSubmit,
+.listFormateurButton {
+    padding: 10px 20px;
+    background: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+    margin-left: 6px;
+}
+
+.addFormateurSubmit:hover,
+.listFormateurButton:hover {
+    background: #0056b3;
+}
+
+.listFormateurButton {
+    background: #28a745;
+}
+
+.listFormateurButton:hover {
+    background: #218838;
+}
+

@@ -5,6 +5,7 @@ import GestionnaireLogin from "./components/Gestionnaire/GestionnaireLogin";
 import GestionnaireSection from "./GestionnaireSection";
 import AdminSection from "./AdminSection";
 import LoginAdmin from "./components/Admin/LoginAdmin";
+import ProfilFormateur from "./components/Gestionnaire/profilFormateur";
 
 function App() {
   return (
@@ -14,6 +15,8 @@ function App() {
         <Route path="/GestionnaireLogin" element={<GestionnaireLogin />}></Route>
         <Route path="*" element={<GestionnaireSection />}></Route>
         {/* <Route path='*' element={<AdminSection/>}></Route> */}
+
+        <Route path="/profilFormateur/:id" element={<ProfilFormateur/>}></Route>
     </Routes>
     </div>
   );

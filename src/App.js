@@ -9,21 +9,19 @@ import LoginAdmin from './components/Admin/LoginAdmin';
 
 import AdminSection from './AdminSection';
 
+import Affecterformateur from './components/AffecterFormateur';
+
+
 function App() {
   return <div className='SiteContainer'>
+ <Routes>
+    {/* <Route path="/Login" element={<LoginAdmin/>}></Route>
+    <Route path='*' element={<AdminSection/>} ></Route> */}
+   <Route path='/Affecter' element={<Affecterformateur/>} ></Route>
+    </Routes> 
     
-    <Routes>
-    <Route path="/Login" element={<LoginAdmin/>}></Route>
-    <Route path='*' element={<AdminSection/>} ></Route>
-   
-    </Routes>
     
     
-
-
-    {/* <Routes>
-      <Route path='*' element={<AdminSection/>}></Route>
-    </Routes> */}
   </div>
   
  

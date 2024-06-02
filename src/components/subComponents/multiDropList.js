@@ -73,7 +73,8 @@ export default function  MultiDropList(props) {
     className="basic-multi-select"
     styles={customStyles}
     classNamePrefix="select"
-    onChange={handleMultiChange} />
+    onChange={handleMultiChange} 
+ />
     
     </div>
 }

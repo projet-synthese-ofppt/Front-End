@@ -110,7 +110,14 @@ export default function AddFormateur() {
             etablissement: '',
             image: null
         });
+
+       
         setImageHolder('/media/profile.png');
+
+         // Reset the file input value
+         if (fileInputRef.current) {
+            fileInputRef.current.value = null;
+        }
     };
 
     function selectedMulti(x) {

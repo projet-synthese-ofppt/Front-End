@@ -9,7 +9,6 @@ import ListFormateur from './components/Admin/listFormateur';
 import ListFormation from './components/Admin/ListFormation';
 import Ajoutergestionnaire from './components/Admin/addGestionnaire';
 import ProfileGestionnaire from './components/Gestionnaire/ProfileGestionnaire';
-import AffecterFormateur from './components/AffecterFormateur';
 import History from './History';
 import Profile from './components/Admin/Profile';
 import MyCalendar from './components/Gestionnaire/GlobalCalendrier';

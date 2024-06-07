@@ -1,0 +1,45 @@
+.formation-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    justify-items: center;
+    margin: 10px;
+}
+
+.formations-card {
+    background-color: #2973b83b;
+    border: 1px solid #555555;
+    border-radius: 20px;
+    padding: 20px;
+    width: 530px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0.2, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.formations-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  }
+  
+  .formations-card h3 {
+    text-align: center;
+    margin-top: 0;
+    color: #333; 
+  }
+  
+  .formations-card p {
+    margin: 8px 0;
+    color: #555;
+    text-align: center;
+
+  }
+  
+  .formations-card p strong {
+    color: #333;
+  }
+  
+  @media (max-width: 768px) {
+    .formation-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  

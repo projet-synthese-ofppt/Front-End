@@ -13,6 +13,7 @@ import AddFormateur from './components/Gestionnaire/Creation_Formateur';
 import MyCalendar from './components/Gestionnaire/GlobalCalendrier';
 import FormateurCalender from './components/Formateur/formateurCalender';
 import  ProfilFormation from "./components/Gestionnaire/ProfilFormation";
+import FormationGrid from "./components/FormationGrid";
 
 function GestionnaireSection() {
   return (
@@ -35,6 +36,7 @@ function GestionnaireSection() {
         <Route path="/detail/:id" element={<ProfilFormation />} />
         
         <Route path="/profilFormation/:id" element={<ProfilFormation/>}></Route>
+        <Route path="/responsability/:id" element={<FormationGrid idFormateur={7}/>}></Route>
       </Routes>
     </>
   );

@@ -160,7 +160,7 @@ export default function ListFormateur() {
                   <td>{i.more_informations.competence.map((x, index) => <li key={index} style={{ listStyle: 'none' }}>{x}</li>)}</td>
                   <td>{i.more_informations.experience.split('\r\n').map((x, index) => <li key={index} style={{ listStyle: 'none' }}>{x}</li>)}</td>
                   <td className="ListgestionnaireActions">
-                    <Link to={`/editFormateur/${i.person_id}`}><img src="/media/edit.png" alt="" width="19px" /></Link>
+                    <Link to={`/profilFormateur/${i.person_id}`}><img src="/media/edit.png" alt="" width="19px" /></Link>
                     <button className="deleteButton" onClick={() => {
                       const confirmDelete = window.confirm("Vous êtes sûr de supprimer ce gestionnaire ?");
                       if (confirmDelete) {

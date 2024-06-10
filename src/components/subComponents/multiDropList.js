@@ -10,7 +10,8 @@ export default function  MultiDropList(props) {
     const paramType = props.paramType;
     const [options,setOptions] = useState([]);
     const [label,setLabel] = useState("");
-    const [droppedData,setDroppedData]= useState([]);
+    // const [droppedData,setDroppedData]= useState([]);
+    const [selectedFromProfile,setSelectedFromProfil] = useState([]);
 
     const customStyles = {
         control: (base) => ({
@@ -44,7 +45,7 @@ export default function  MultiDropList(props) {
             .then(res =>
                 {
                     
-                    console.log(res.data)
+                   
                     let T = [];
                     res.data.param_data.map(x => T.push({value:x,label:x}));
                     setOptions(T);
@@ -59,8 +60,29 @@ export default function  MultiDropList(props) {
             )
         },[paramType])
 
+    
+        useEffect( () =>
+            {
+                
+                      if(props.profilValue)  
+                        {
+                            console.log(props.profilValue)
+                            let T = [];
+                            props.profilValue.map(x => T.push({value:x,label:x}));
+                            console.log(T);
+                        setSelectedFromProfil(T);
+                        }
+                        
+                   
+                        
+                   
+                
+            },[props.profilValue])
+    
+
         function handleMultiChange(selected)
         {
+            setSelectedFromProfil(selected)
             props.selectedMulti(selected)
         }
     return <div className="multiDropList">
@@ -74,6 +96,7 @@ export default function  MultiDropList(props) {
     styles={customStyles}
     classNamePrefix="select"
     onChange={handleMultiChange} 
+    value={selectedFromProfile}
  />
     
     </div>

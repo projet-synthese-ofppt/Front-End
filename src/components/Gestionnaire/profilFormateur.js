@@ -6,9 +6,10 @@ import MultiDropList from "../subComponents/multiDropList";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function ProfilFormateur() {
-    const [imgHolder, setImageHolder] = useState('/media/profile.png');
+
     const fileInputRef = useRef(null);
     const navigate = useNavigate();
+    const [incFormateur,setIncFormateur] = useState({});
     const [formateurData, setFormateurData] = useState({
         first_name: '',
         last_name: '',
@@ -25,7 +26,7 @@ export default function ProfilFormateur() {
     });
 
     const idFormateur = useParams().id;
-
+    const [imgHolder, setImageHolder] = useState(``);
     const [alert, setAlert] = useState('');
 
     
@@ -35,9 +36,11 @@ export default function ProfilFormateur() {
                 {
                     axios.get(`http://localhost:3002/api/getFormateur/${idFormateur}`)
                     .then(res => {
-                        console.log(res.data.more_informations.specialite)
+                        console.log(res.data.more_informations)
                         setFormateurData(res.data);
+                        setIncFormateur(res.data)
                         console.log(res.data)
+                        setImageHolder(`http://localhost:3002/uploads/${res.data.image}`)
                     }).catch(error => {
                         console.error(error)
                     })
@@ -80,8 +83,10 @@ export default function ProfilFormateur() {
         const { name, value } = e.target;
         setFormateurData(prevState => ({
             ...prevState,
-            more_information: { ...prevState.more_information, [name]: value }
+            more_informations: { ...prevState.more_informations, [name]: value }
         }));
+
+        
     };
 
     //public data select handling
@@ -93,7 +98,7 @@ export default function ProfilFormateur() {
     function setSpecialite(elementType, elementValue)
     {
         
-        setFormateurData(prevState => ({...prevState,more_information:{...prevState.more_information,[elementType]:elementValue}}));
+        setFormateurData(prevState => ({...prevState,more_informations:{...prevState.more_informations,[elementType]:elementValue}}));
     }
 
    //Submit handling
@@ -102,51 +107,27 @@ export default function ProfilFormateur() {
 
         const token = localStorage.getItem('token');
         console.log(formateurData);
-        axios.post('http://localhost:3002/api/ajouterFormateur', formateurData, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-                "authorization": `Bearer ${token}`
-            }
-        })
-            .then(res => {
-                if (res.data.Done) {
-                    setAlert('Formateur bien ajouté');
-                    resetForm();
-                }
-            })
-            .catch(error => console.error(error));
+        // axios.post('http://localhost:3002/api/ajouterFormateur', formateurData, {
+        //     headers: {
+        //         'Content-Type': 'multipart/form-data',
+        //         "authorization": `Bearer ${token}`
+        //     }
+        // })
+        //     .then(res => {
+        //         if (res.data.Done) {
+        //             setAlert('Formateur bien ajouté');
+        //         }
+        //     })
+        //     .catch(error => console.error(error));
     };
 
-    const resetForm = () => {
-        setFormateurData({
-            first_name: '',
-            last_name: '',
-            login: '',
-            password: '',
-            more_information: {
-                specialite: '',
-                experience: '',
-                competence: []
-            },
-            type: '',
-            etablissement: '',
-            image: null
-        });
-
-       
-        setImageHolder('/media/profile.png');
-
-         // Reset the file input value
-         if (fileInputRef.current) {
-            fileInputRef.current.value = null;
-        }
-    };
+ 
 
     function selectedMulti(x) {
         let T = x.map(x => x.value);
         setFormateurData(prevState => ({
             ...prevState,
-            more_information: { ...prevState.more_information, competence: T }
+            more_informations: { ...prevState.more_informations, competence: T }
         }));
     }
 
@@ -160,7 +141,7 @@ export default function ProfilFormateur() {
             {alert && <p className="addFormateurAlert">{alert}</p>}
             <form action="" className="addFormateurForm" onSubmit={handleSubmit}>
                 <div className="addFormateurImageContainer">
-                    <img id="addFormateurImage" src={`http://localhost:3002/uploads/${formateurData.image}`} alt="" onClick={handleImageClick} />
+                    <img id="addFormateurImage" src={imgHolder} alt="" onClick={handleImageClick} />
                     <input type="file" accept="image/*" ref={fileInputRef} hidden onChange={handleUploadedImage} />
                 </div>
                 <div className="addFormteurInputsContainer">
@@ -178,26 +159,27 @@ export default function ProfilFormateur() {
                     </div>
                    
                     <div className="inputSubContainer">
-                        <DropList paramType='specialite' searchedElement={setSpecialite} ></DropList>
+                        <DropList paramType='specialite' searchedElement={setSpecialite} profilValue = {formateurData.more_informations.specialite} ></DropList>
                     </div>
                     <div className="inputSubContainer full-width" id="multiDrop">
-                        <MultiDropList paramType={"competence"} selectedMulti={selectedMulti} />
+                        <MultiDropList paramType={"competence"} selectedMulti={selectedMulti} profilValue = {formateurData.more_informations.competence} />
                     </div>
                     <div className="inputSubContainer full-width">
-                        <DropList paramType='type' searchedElement={searchedElement} />
+                        <DropList paramType='type' searchedElement={searchedElement} profilValue = {formateurData.type}  />
                     </div>
                     <div className="inputSubContainer full-width">
-                        <DropList paramType='etablissement' searchedElement={searchedElement} />
+                        <DropList paramType='etablissement' searchedElement={searchedElement}   profilValue = {formateurData.nom}/>
                     </div>
                     <div className="inputSubContainer full-width">
                         <label htmlFor="experience" className="addFormateurLabel">Expérience(s)</label>
-                        {/* <textarea className="addFormateurTextArea" name="experience" id="experience" rows="10" cols="5" value={formateurData.more_information.experience} onChange={handleChangeDetails}></textarea> */}
+                        <textarea className="addFormateurTextArea" name="experience" id="experience" rows="10" cols="5" value={formateurData.more_informations.experience} onChange={handleChangeDetails}></textarea>
                         <p className="addFormateurHint">Pour ajouter plusieurs expériences, écrivez chacune dans une nouvelle ligne</p>
                     </div>
                 </div>
                 <div className="addFormteurButtonsContainer">
                     <input type="submit" value="Valider" className="addFormateurSubmit" />
                     <button type="button" onClick={goListFormateur} className="listFormateurButton">List des formateurs</button>
+               
                 </div>
             </form>
         </div>

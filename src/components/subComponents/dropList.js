@@ -17,6 +17,16 @@ export default function DropList(props)
         if(props.reset)
             setSelectedValue('');
     },[props.reset])
+
+      
+    useEffect(() =>
+        {
+            if(props.profilValue)
+                setSelectedValue(props.profilValue);
+            
+        },[props.profilValue])
+
+    
     
     function handleDropListChange(e)
     {
@@ -57,7 +67,7 @@ export default function DropList(props)
     
     return <div className="dropList">
         <label className="dropListLabel" htmlFor="">{label}:</label>
-        <select className="dropListSelect" name="" id="" onChange={handleDropListChange} value={selectedValue}>
+        <select className="dropListSelect" name=""  onChange={handleDropListChange} value={selectedValue}>
             <option value=""></option>
             {droppedData.map((v,key) =>(
                 <option key={key} value={v}>{v}</option>

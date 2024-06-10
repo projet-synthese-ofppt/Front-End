@@ -14,7 +14,7 @@ export default function AddFormateur() {
         last_name: '',
         login: '',
         password: '',
-        more_information: {
+        more_informations: {
             specialite: '',
             experience: '',
             competence: []
@@ -58,7 +58,7 @@ export default function AddFormateur() {
         const { name, value } = e.target;
         setFormateurData(prevState => ({
             ...prevState,
-            more_information: { ...prevState.more_information, [name]: value }
+            more_informations: { ...prevState.more_informations, [name]: value }
         }));
     };
 
@@ -71,7 +71,7 @@ export default function AddFormateur() {
     function setSpecialite(elementType, elementValue)
     {
         
-        setFormateurData(prevState => ({...prevState,more_information:{...prevState.more_information,[elementType]:elementValue}}));
+        setFormateurData(prevState => ({...prevState,more_informations:{...prevState.more_informations,[elementType]:elementValue}}));
     }
 
    //Submit handling
@@ -101,7 +101,7 @@ export default function AddFormateur() {
             last_name: '',
             login: '',
             password: '',
-            more_information: {
+            more_informations: {
                 specialite: '',
                 experience: '',
                 competence: []
@@ -124,7 +124,7 @@ export default function AddFormateur() {
         let T = x.map(x => x.value);
         setFormateurData(prevState => ({
             ...prevState,
-            more_information: { ...prevState.more_information, competence: T }
+            more_information: { ...prevState.more_informations, competence: T }
         }));
     }
 
@@ -172,7 +172,7 @@ export default function AddFormateur() {
                     </div>
                     <div className="inputSubContainer full-width">
                         <label htmlFor="experience" className="addFormateurLabel">Expérience(s)</label>
-                        <textarea className="addFormateurTextArea" name="experience" id="experience" rows="10" cols="5" value={formateurData.more_information.experience} onChange={handleChangeDetails}></textarea>
+                        <textarea className="addFormateurTextArea" name="experience" id="experience" rows="10" cols="5" value={formateurData.more_informations.experience} onChange={handleChangeDetails}></textarea>
                         <p className="addFormateurHint">Pour ajouter plusieurs expériences, écrivez chacune dans une nouvelle ligne</p>
                     </div>
                 </div>

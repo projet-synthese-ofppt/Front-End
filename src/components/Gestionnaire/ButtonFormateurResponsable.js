@@ -2,16 +2,13 @@ import { useState } from "react";
 import FormateurResponsable from "./FormateurResponsable";
 import { Button } from 'react-bootstrap';
 
-export default function ButtonFormateurResponsable(){
+export default function ButtonFormateurResponsable(props){
     const [modalShow, setModalShow] = useState(false);
-    const [message,setMessage]=useState("")
-    function AfficherMessage(msg){
-         setMessage(msg)
-    }
+    
 
     return (
         <>
-       {message && <p class="alert alert-success text-center">{message}</p>}
+      
           <Button variant="primary" onClick={() => setModalShow(true)}>
             Formateur Responsable
           </Button>
@@ -19,7 +16,8 @@ export default function ButtonFormateurResponsable(){
           <FormateurResponsable
             show={modalShow}
             onHide={() => setModalShow(false)}
-            msg={AfficherMessage}
+           
+            id={props.id}
           />
         </>
       );

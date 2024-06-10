@@ -63,7 +63,7 @@ const ProfilFormation = () => {
     <div className='body-con'>
       <div className="image-container" style={{backgroundImage:"url(/../formation.jpeg)",backgroundRepeat:"no-repeat",backgroundSize:"cover"}}>
          <div className='mybuttonsFormations'>
-         <ButtonFormateurResponsable/>
+         <ButtonFormateurResponsable id={id}/>
          <Affecterformateur/>
          </div>
        
@@ -74,7 +74,7 @@ const ProfilFormation = () => {
       <div className="navbar">
         <Link to={`/detail/${id}`}>Détail</Link>
         <Link to={`/formateur/${id}`}>Formateur</Link>
-        <ButtonFormation/>
+        <ButtonFormation id={id}/>
        
       </div>
       <div className="formation-card-p">

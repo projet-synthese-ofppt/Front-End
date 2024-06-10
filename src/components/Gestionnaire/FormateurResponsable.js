@@ -6,6 +6,7 @@ import { Modal } from 'react-bootstrap';
 export default function FormateurResponsable(props){
 const [formateurs,setFormateurs]=useState([]);
 const [idFormateur,setIdFormateur]=useState(null);
+const id = props.id;
 
 
     useEffect(() => {
@@ -25,8 +26,8 @@ const [idFormateur,setIdFormateur]=useState(null);
 async function  HandleValider(){
       
       try{
-          const response= await axios.post('http://localhost:3002/api/setFormateur',{idFormateur})
-          props.msg(response.data.message)
+          const response= await axios.post('http://localhost:3002/api/setFormateur',{idFormateur,id})
+          
           props.onHide()
       }catch(err)
         {

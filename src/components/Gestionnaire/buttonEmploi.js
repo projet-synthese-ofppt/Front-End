@@ -4,7 +4,7 @@ import "./form.css";
 import Button from "react-bootstrap/Button";
 import CalendarFormation from './Emploi'
 
-export default function ButtonFormation() {
+export default function ButtonFormation(props) {
   const [modalShow, setModalShow] = useState(false);
   
 
@@ -19,7 +19,7 @@ export default function ButtonFormation() {
       >
         Emploi
       </Button>
-      <CalendarFormation show={modalShow} onHide={() => setModalShow(false)} />
+      <CalendarFormation show={modalShow} onHide={() => setModalShow(false)} id={props.id}/>
     </>
   );
 }

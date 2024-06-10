@@ -13,11 +13,14 @@ function CalendarFormation(props) {
   const [loading, setLoading] = useState(true);
   const [convertedData, setConvertedData] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
+  // const id=;
+  const id=props.id;
+ 
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3002/api/emploi");
+        const response = await axios.get("http://localhost:3002/api/emploi", {id});
         const data = response.data.formation;
         console.log(data);
 
@@ -91,8 +94,8 @@ function CalendarFormation(props) {
       </Modal.Header>
       <Modal.Body>
         <div className="GlobalCalender">
-          <div className="mycalender">
-            <h1 className="titleCalendrier">Calendrier des formations</h1>
+          <div className="mycalender2">
+            <h1 className="titleCalendrier2">Calendrier des formations</h1>
             {!loading && (
               <Calendar
                 localizer={localizer}
